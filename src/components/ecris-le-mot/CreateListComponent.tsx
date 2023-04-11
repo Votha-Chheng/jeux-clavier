@@ -47,7 +47,7 @@ const CreateListComponent: FC = () => {
 
   const goBack = (): void => {
     let temp: ListeMotCustom[] = []
-    
+
     if(customisedList.nom.length>0 && customisedList !== undefined){
       if(typeMot === "prénom"){
         if((prenomsCustom === undefined) || (prenomsCustom.length<1)){
@@ -82,7 +82,7 @@ const CreateListComponent: FC = () => {
         ((customisedList.nom.length>0)) &&
         <>
           <figcaption>
-            Entrer un mot sans majuscule. <br/>Si vous rentrez un mot contenant un accent, une cédille ou autres, la possibilité d'affichage en majuscule sera désactivée.
+            Entrer un mot sans majuscule. <br/>Si vous rentrez un mot contenant un accent, une cédille ou autres, la possibilité d&APOS;affichage en majuscule sera désactivée.
           </figcaption>
           <input value={motInput} onChange={(event: FormEvent<HTMLInputElement>)=> handleChangeWordInput(event) } placeholder='Entrez votre mot'/>
           <div>
