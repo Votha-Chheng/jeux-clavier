@@ -1,12 +1,16 @@
+import { letters } from '@/datas/trouve-la-lettre/letters'
+import { RootState } from '@/store/store';
 import { FC, useEffect } from 'react'
-import { letters } from '../../../data/letters'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
 type ListLettresProps = {
-  lettersSuccess: string[]
+  lettersSuccess: string[];
 }
 const ListLettres: FC<ListLettresProps> = ({lettersSuccess}) => {
   const LETTERS = letters
+
+  const { typeLettre } = useSelector((state: RootState)=> state.trouveLaLettre)
 
   useEffect(()=> {
 
@@ -20,7 +24,7 @@ const ListLettres: FC<ListLettresProps> = ({lettersSuccess}) => {
           key={letter} 
           style={{color:`${lettersSuccess.includes(letter) ? "#f5f5f5": "green"}`, transform:`scale(${lettersSuccess.includes(letter) ? "1": "1.75"}) translateY(${lettersSuccess.includes(letter) ? "20px": "0"})`}}
         >
-          {letter.toUpperCase()}
+          {typeLettre === "capitale" ? letter.toUpperCase() : letter.toLowerCase()}
         </div>
       ))
     }
@@ -29,7 +33,7 @@ const ListLettres: FC<ListLettresProps> = ({lettersSuccess}) => {
 }
 
 const Container = styled.div`
-  margin: 20px auto;
+  margin: 100px auto 0;
   display:flex;
   justify-content: center;
   gap: 7.5px;
