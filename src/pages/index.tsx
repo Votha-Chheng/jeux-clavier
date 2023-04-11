@@ -19,7 +19,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <HomeScreenContainer>
-        <h1>Jeux d&APOS;écriture</h1>
+        <h1>Jeux d&apos;écriture</h1>
         <div className='card-container'>
           <CardMenuGame title='Trouve la lettre' link="trouve-la-lettre"/>
           <CardMenuGame title='	&Eacute;cris des mots' link="ecris-le-mot"/>
