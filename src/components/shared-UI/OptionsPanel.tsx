@@ -7,7 +7,7 @@ import styled from 'styled-components'
 
 type OptionsPanelProps = {
   children: JSX.Element;
-  onClickHandler: Function;
+  onClickHandler?: Function;
 }
 
 const OptionsPanel: FC<OptionsPanelProps> = ({children, onClickHandler}) => {
@@ -16,7 +16,7 @@ const OptionsPanel: FC<OptionsPanelProps> = ({children, onClickHandler}) => {
   return (
     <OptionsSection className={`${showUp ? "down": "up"}`}>
       {children}
-      <div onClick={()=>onClickHandler()} className='preferences' style={!showUp ? {transform: "translateY(75px)"}: {transform: "translateY(0)"}}>
+      <div onClick={()=>onClickHandler !== undefined ? onClickHandler() : null} className='preferences' style={!showUp ? {transform: "translateY(75px)"}: {transform: "translateY(0)"}}>
         <Image src={`/images/${showUp ? "check" : "options"}.svg`} alt="Paramètre du jeu" width={50} height={50} />
       </div>
     </OptionsSection>

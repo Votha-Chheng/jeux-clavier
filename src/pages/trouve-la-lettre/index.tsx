@@ -26,7 +26,6 @@ const FindTheLetter: FC = () => {
   const [letterInput, setLetterInput] = useState<string>("")
   const [letterModel, setLetterModel] = useState<string>("")
   const [lettersLeft, setLettersLeft] = useState<string[]>([])
-  const [showUp, setShowUp] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => { setMounted(true) }, []);  // avoid hydration issues - run on client
