@@ -114,7 +114,7 @@ const CustomListModify: FC<CustomListModifyProps> = ({ handleWordValidation, mot
           </div>
         </div>
         :
-        <h3>Vous n'avez séléctionné aucune liste.</h3>
+        <h3>Vous n&apos;avez séléctionné aucune liste.</h3>
       }
       <div className='back'>
         <Image onClick={()=> typeMot==="prénom" ? replaceList(customPrenomsListArray) : replaceList(customMotsListArray)} src='/images/arrow-down.svg' alt="Retour aux préférences" width={50} height={50} />
