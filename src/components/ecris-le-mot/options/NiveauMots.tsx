@@ -22,7 +22,7 @@ const NiveauMots: FC<NiveauMotProps> = ({disabled}) => {
 
   useEffect(() => {
     if(typeMot === "prénom"){
-      dispatch(getOptions({...options, niveauMots: undefined}))
+      dispatch(getOptions({...options, niveauMots: 0}))
     } else {
       dispatch(getOptions({...options, niveauMots: 1}))
     }
