@@ -15,7 +15,6 @@ const CreateListPanel: FC<CreateListPanelProps> = ({}) => {
   const [motInput, setMotInput] = useState<string>("")
   const [wordExists, setWordExists] = useState<boolean>(false)
   const { createList, modifyList } = useSelector((state: RootState)=> state.ecrisLeMot)
-  const { customMotsListArray, customPrenomsListArray } = useSelector((state: RootState)=> state.customListArray)
 
   const keyUp = useKeyUp()
   
