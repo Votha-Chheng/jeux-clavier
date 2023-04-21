@@ -3,9 +3,9 @@ import { persistReducer } from 'redux-persist';
 import ecrisLeMotReducer from './slices/ecrisLeMotSlice';
 import optionsPanelReducer from './slices/optionsPanelSlice';
 import trouveLaLettreSlice from './slices/trouveLaLettreSlice';
-import listeMotsCustomReducer from './slices/listeMotsCustom';
 import { createWrapper } from 'next-redux-wrapper';
 import createWebStorage from 'redux-persist/lib/storage/createWebStorage';
+import customListArrayReducer from './slices/customListArray';
 
 const createNoopStorage = () => {
   return {
@@ -25,13 +25,13 @@ const reducers = combineReducers({
   ecrisLeMot: ecrisLeMotReducer,
   optionsPanel: optionsPanelReducer,
   trouveLaLettre: trouveLaLettreSlice,
-  listeMotsCustom: listeMotsCustomReducer
+  customListArray: customListArrayReducer
 })
 
 const persistConfig = {
   key: 'root',
   storage: typeof window === "undefined" ? createNoopStorage() : createWebStorage('local'),
-  whitelist: ['listeMotsCustom']
+  whitelist: ['customListArray']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

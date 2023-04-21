@@ -1,21 +1,31 @@
-import { ListeMotCustom } from '@/store/slices/listeMotsCustom';
-import React, { FC } from 'react'
+import { RootState } from '@/store/store';
+import React, { ChangeEvent, FC } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
 
 type SelectComponentProps = {
-  optionsList: ListeMotCustom[];
+  arrayListsName: string[];
   disabled: boolean;
   title: string;
-  idForm: string
+  idForm: string;
+  handleChangeFunction: Function;
+  value?: string;
 }
 
-const SelectComponent: FC<SelectComponentProps> = ({optionsList, disabled, title, idForm}) => {
+const SelectComponent: FC<SelectComponentProps> = ({arrayListsName, disabled, title, idForm, handleChangeFunction, value}) => {
+  const { selectedCustomListName } = useSelector((state: RootState)=> state.ecrisLeMot)
+  const dispatch = useDispatch()
+
   return (
-    <select id={idForm} disabled={disabled}>
+    <select value={value !== undefined ? value : selectedCustomListName} id={idForm} disabled={disabled} onChange={(event: ChangeEvent<HTMLSelectElement>)=> handleChangeFunction(event)}>
       <option value="">-- {title} --</option>
       { 
-        optionsList !== undefined && optionsList.map((listMots: ListeMotCustom, index: number)=> (
-          <option key={index} value={listMots.nom}>{listMots.nom}</option>
+        arrayListsName !== undefined 
+        ? 
+        arrayListsName.map((nom: string, index: number)=> (
+          <option key={index} value={nom}>{nom}</option>
         ))
+        :
+        null
       }
     </select>   
   )

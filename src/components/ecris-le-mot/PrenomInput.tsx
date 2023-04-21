@@ -1,5 +1,7 @@
+import { RootState } from '@/store/store';
 import { Roboto } from 'next/font/google';
 import React, { FC } from 'react'
+import { useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
 type PrenomInputProps = {
@@ -14,6 +16,8 @@ const roboto = Roboto({
 })
 
 const PrenomInput: FC<PrenomInputProps> = ({success, lettersTapped, wordSuccess}) => {
+  const { options  } = useSelector((state: RootState)=> state.ecrisLeMot)
+  const { uppercase } = options
   return (
     <InputDiv className={`${wordSuccess && "word-success"}`} style={wordSuccess || (success === true) ? {outline:"5px solid green"} : success === false ? {outline:"5px solid red"} : {}}>
     {
@@ -23,7 +27,7 @@ const PrenomInput: FC<PrenomInputProps> = ({success, lettersTapped, wordSuccess}
           style={ {color:`${(wordSuccess || (success === true) && (index === lettersTapped.length-1)) ? "green": (success === false) && (index === lettersTapped.length-1) ? "red" : "black" }` }} 
           key={index}
         >
-          {letter.toUpperCase()}
+          {uppercase ? letter.toUpperCase(): letter}
         </span>
       ))
     }

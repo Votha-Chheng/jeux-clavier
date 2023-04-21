@@ -1,3 +1,4 @@
+import LoadingScreen from '@/components/shared-UI/LoadingScreen'
 import { wrapper } from '@/store/store'
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
@@ -13,7 +14,7 @@ function App({ Component, ...rest }: AppProps) {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
+      <PersistGate loading={<LoadingScreen/>} persistor={persistor}>
         <Component {...pageProps} />
       </PersistGate>
     </Provider>

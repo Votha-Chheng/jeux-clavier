@@ -9,7 +9,7 @@ export const useKeyUp = (): string => {
 
   useEffect(()=> {
     window.addEventListener("keyup", event => setTouche(event.key))
-    window.addEventListener("keydown", event => returnNull())
+    window.addEventListener("keydown", () => returnNull())
 
     return () => {
       window.removeEventListener("keyup",  event => setTouche(event.key))

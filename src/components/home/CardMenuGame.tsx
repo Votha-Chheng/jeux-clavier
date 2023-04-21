@@ -13,7 +13,7 @@ const CardMenuGame: FC<CardMenuGameProps> = ({title, link}) => {
   const dispatch = useDispatch()
 
   return (
-    <Link href={`/${link}`} onClick={()=> dispatch(setShowUp(true))}>
+    <Link href={`/${link}`} onClick={()=> dispatch(setShowUp(false))}>
       <Card>
         {title}
       </Card>

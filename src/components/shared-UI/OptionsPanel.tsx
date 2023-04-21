@@ -1,24 +1,22 @@
-import { setShowUp } from '@/store/slices/optionsPanelSlice';
 import { RootState } from '@/store/store';
 import Image from 'next/image';
-import React, { FC, useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux';
+import React, { FC } from 'react'
+import { useSelector } from 'react-redux';
 import styled from 'styled-components'
-import CreateListPanel from '../ecris-le-mot/CreateListPanel';
+
 
 type OptionsPanelProps = {
   children: JSX.Element;
+  onClickHandler: Function;
 }
 
-const OptionsPanel: FC<OptionsPanelProps> = ({children}) => {
-
+const OptionsPanel: FC<OptionsPanelProps> = ({children, onClickHandler}) => {
   const { showUp } = useSelector((state: RootState)=> state.optionsPanel)
-  const dispatch = useDispatch()
 
   return (
     <OptionsSection className={`${showUp ? "down": "up"}`}>
       {children}
-      <div onClick={()=>dispatch(setShowUp(!showUp))} className='preferences' style={!showUp ? {transform: "translateY(75px)"}: {transform: "translateY(0)"}}>
+      <div onClick={()=>onClickHandler()} className='preferences' style={!showUp ? {transform: "translateY(75px)"}: {transform: "translateY(0)"}}>
         <Image src={`/images/${showUp ? "check" : "options"}.svg`} alt="Paramètre du jeu" width={50} height={50} />
       </div>
     </OptionsSection>
@@ -51,10 +49,6 @@ const OptionsSection = styled.section`
     z-index:6;
     transition: transform 0.25s linear;
     cursor: pointer;
-
-    &.cancel {
-      top: 10px;
-    }
   }
 `
 

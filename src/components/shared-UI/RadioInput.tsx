@@ -3,7 +3,7 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 
 type RadioInputProps = {
-  checkingFunction: boolean;
+  isChecked: boolean;
   handleClick: Function;
   id: string;
   value: string|number;
@@ -15,11 +15,11 @@ const roboto = Roboto({
   subsets: ['latin']
 })
 
-const RadioInput: FC<RadioInputProps> = ({checkingFunction, handleClick, id, value, disabled=false}) => {
+const RadioInput: FC<RadioInputProps> = ({isChecked, handleClick, id, value, disabled=false}) => {
 
   return (
     <RadioStyle className={roboto.className}>
-      <input readOnly type="radio" id={id} onClick={()=> handleClick()} value={value} checked={checkingFunction} disabled={disabled}/>
+      <input readOnly type="radio" id={id} onClick={()=> handleClick()} value={value} checked={isChecked} disabled={disabled}/>
       <label htmlFor={id} style={{color: `${disabled ? "#f5f5f5":"black"}`}}>{value}</label>
     </RadioStyle>
   )
