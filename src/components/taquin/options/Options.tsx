@@ -16,7 +16,7 @@ const rubik = Rubik({
 const Options: FC<OptionsTaquin> = ({image, setImage}) => {
   return (
     <OptionsTaquinStyle>
-      <h1 className={rubik.className + " titre-options"}>Choix de l'image :</h1>
+      <h1 className={rubik.className + " titre-options"}>Choix de l&apos;image :</h1>
       <section className='radio-image'>
         <RadioInput 
           width='300px'
