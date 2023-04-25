@@ -23,28 +23,28 @@ const Options: FC<OptionsTaquin> = ({image, setImage}) => {
           isChecked={image==='taquin-1.png'}
           id={image}
           handleClick={()=> setImage("taquin-1.png")}
-          value={<Image src={`/images/taquin-1.png`} width={200} height={200} alt={image} />}
+          value={<Image src={`/images/mini-taquin-1.png`} width={200} height={200} alt={image} />}
         />
         <RadioInput 
           width='300px'
           isChecked={image==='taquin-2.png'}
           id={image}
           handleClick={()=> setImage("taquin-2.png")}
-          value={<Image src={`/images/taquin-2.png`} width={200} height={200} alt={image} />}
+          value={<Image src={`/images/mini-taquin-2.png`} width={200} height={200} alt={image} />}
         />
         <RadioInput 
           width='300px'
           isChecked={image==='taquin-3.png'}
           id={image}
           handleClick={()=> setImage("taquin-3.png")}
-          value={<Image src={`/images/taquin-3.png`} width={200} height={200} alt={image} />}
+          value={<Image src={`/images/mini-taquin-3.png`} width={200} height={200} alt={image} />}
         />
         <RadioInput 
           width='300px'
           isChecked={image==='taquin-4.png'}
           id={image}
           handleClick={()=> setImage("taquin-4.png")}
-          value={<Image src={`/images/taquin-4.png`} width={200} height={200} alt={image} />}
+          value={<Image src={`/images/mini-taquin-4.png`} width={200} height={200} alt={image} />}
         />
       </section>
     </OptionsTaquinStyle>
