@@ -1,0 +1,1 @@
+export const NUMBER_OF_PIECE = Array.from(Array(9).keys())

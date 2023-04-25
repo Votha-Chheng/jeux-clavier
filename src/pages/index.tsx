@@ -21,6 +21,7 @@ export default function Home() {
       <HomeScreenContainer>
         <h1>Jeux d&apos;écriture</h1>
         <div className='card-container'>
+          <CardMenuGame title='Jeu du taquin' link="taquin"/>
           <CardMenuGame title='Trouve la lettre' link="trouve-la-lettre"/>
           <CardMenuGame title='	&Eacute;cris des mots' link="ecris-le-mot"/>
         </div>

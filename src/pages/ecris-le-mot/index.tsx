@@ -35,7 +35,6 @@ const EcrisLeMot: FC = () => {
   const [end, setEnd] = useState<boolean>(false)
   const [mounted, setMounted] = useState(false)
 
-
   useEffect(() => { setMounted(true) }, []);  // avoid hydration issues - run on client
 
   const letterPressed =  useKeyUpForLettersOnly()
@@ -159,8 +158,6 @@ const EcrisLeMot: FC = () => {
       dispatch(setShowUp(!showUp))
     }
   }
-
-  console.log(selectedList)
 
   if (!mounted) return null
 

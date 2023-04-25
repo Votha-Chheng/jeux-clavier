@@ -4,13 +4,14 @@ import Restart from './Restart';
 import styled from 'styled-components';
 
 type IconsFooterProps = {
-  end: boolean;
+  end?: boolean;
   reset: Function;
+  marginTop?: string;
 }
 
-const IconsFooter: FC<IconsFooterProps> = ({end, reset}) => {
+const IconsFooter: FC<IconsFooterProps> = ({end, reset, marginTop="75px"}) => {
   return (
-    <IconsContainer className='back-to-menu'>
+    <IconsContainer className='back-to-menu' style={{marginTop}} >
       <BackToMenu/>
       <Restart reset={reset}/>
     </IconsContainer>
@@ -18,7 +19,6 @@ const IconsFooter: FC<IconsFooterProps> = ({end, reset}) => {
 }
 
 const IconsContainer = styled.div`
-  margin : 75px 0 0;
   display:flex;
   justify-content: space-between;
   
