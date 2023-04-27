@@ -10,15 +10,8 @@ import MajusculeRadio from './MajusculeRadio'
 import NiveauMots from './NiveauMots'
 import { getOptions } from '@/store/slices/ecrisLeMotSlice'
 import CustomListRadio from './CustomListRadio'
+import { rubik } from '@/fonts/rubik'
 
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin']
-})
 
 const OptionsWriteWords: FC = () => {
   const { options, selectedList } = useSelector((state: RootState)=>  state.ecrisLeMot)

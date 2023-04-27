@@ -4,17 +4,9 @@ import { Rubik } from 'next/font/google'
 import { RootState } from '@/store/store'
 import { useDispatch, useSelector } from 'react-redux'
 import { getOptions } from '@/store/slices/ecrisLeMotSlice'
+import { rubik } from '@/fonts/rubik'
 
-type MajusculeRadioProps = {
-
-}
-
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
-
-const MajusculeRadio: FC<MajusculeRadioProps> = () => {
+const MajusculeRadio: FC = () => {
 
   const { options } = useSelector((state: RootState)=> state.ecrisLeMot)
   const { uppercase } = options

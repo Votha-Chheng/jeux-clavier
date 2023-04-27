@@ -1,18 +1,11 @@
+import { roboto } from '@/fonts/roboto';
+import { rubik } from '@/fonts/rubik';
 import { changeTypeLettre } from '@/store/slices/trouveLaLettreSlice';
 import { RootState } from '@/store/store';
 import { Roboto, Rubik } from 'next/font/google'
 import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
-
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin']
-})
 
 const Options: FC = () => {
 

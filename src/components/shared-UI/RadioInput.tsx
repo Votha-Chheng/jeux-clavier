@@ -1,3 +1,4 @@
+import { roboto } from '@/fonts/roboto';
 import { Roboto } from 'next/font/google'
 import React, { FC } from 'react'
 import styled from 'styled-components'
@@ -10,11 +11,6 @@ type RadioInputProps = {
   disabled ? : boolean;
   width?: string;
 }
-
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin']
-})
 
 const RadioInput: FC<RadioInputProps> = ({isChecked, handleClick, id, value, disabled=false, width="100%"}) => {
 

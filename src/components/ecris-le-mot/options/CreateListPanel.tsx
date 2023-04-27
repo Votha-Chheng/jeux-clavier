@@ -6,11 +6,7 @@ import CreateListComponent from './CreateListComponent';
 import CustomListModify from './CustomListModify';
 import { useKeyUp } from '../../../../hooks/useKeyUp';
 
-type CreateListPanelProps = {
-
-}
-
-const CreateListPanel: FC<CreateListPanelProps> = ({}) => {
+const CreateListPanel: FC = () => {
   const [listeMots, setListeMots] = useState<string[]>([])
   const [motInput, setMotInput] = useState<string>("")
   const [wordExists, setWordExists] = useState<boolean>(false)

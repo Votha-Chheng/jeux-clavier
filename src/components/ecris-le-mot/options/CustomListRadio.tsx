@@ -8,11 +8,7 @@ import RadioInput from '@/components/shared-UI/RadioInput'
 import SelectComponent from '../SelectComponent'
 import { returnNamesFromList } from '@/utils/returnNamesFromList'
 import { deleteCustomMotsList, deleteCustomPrenomList } from '@/store/slices/customListArray'
-
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
+import { rubik } from '@/fonts/rubik'
 
 const CustomListRadio: FC = () => {
   const { customMotsListArray, customPrenomsListArray } = useSelector((state: RootState)=> state.customListArray)

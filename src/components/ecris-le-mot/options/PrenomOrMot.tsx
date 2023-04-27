@@ -4,12 +4,7 @@ import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RadioInput from '../../shared-UI/RadioInput'
 import { getOptions } from '@/store/slices/ecrisLeMotSlice'
-
-
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
+import { rubik } from '@/fonts/rubik'
 
 const PrenomOrMot: FC = () => {
   const { options } = useSelector((state: RootState)=> state.ecrisLeMot)

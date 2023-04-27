@@ -13,7 +13,6 @@ type SelectComponentProps = {
 
 const SelectComponent: FC<SelectComponentProps> = ({arrayListsName, disabled, title, idForm, handleChangeFunction, value}) => {
   const { selectedCustomListName } = useSelector((state: RootState)=> state.ecrisLeMot)
-  const dispatch = useDispatch()
 
   return (
     <select value={value !== undefined ? value : selectedCustomListName} id={idForm} disabled={disabled} onChange={(event: ChangeEvent<HTMLSelectElement>)=> handleChangeFunction(event)}>

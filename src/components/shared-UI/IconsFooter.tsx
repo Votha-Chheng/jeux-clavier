@@ -7,11 +7,12 @@ type IconsFooterProps = {
   end?: boolean;
   reset: Function;
   marginTop?: string;
+  width?:string;
 }
 
-const IconsFooter: FC<IconsFooterProps> = ({end, reset, marginTop="75px"}) => {
+const IconsFooter: FC<IconsFooterProps> = ({reset, marginTop="75px", width}) => {
   return (
-    <IconsContainer className='back-to-menu' style={{marginTop}} >
+    <IconsContainer className='back-to-menu' style={{marginTop, width}} >
       <BackToMenu/>
       <Restart reset={reset}/>
     </IconsContainer>

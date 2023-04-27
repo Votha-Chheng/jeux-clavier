@@ -5,14 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { getOptions } from '@/store/slices/ecrisLeMotSlice'
 import { type } from 'os'
+import { rubik } from '@/fonts/rubik'
 
 type NombreDeMotsProps = {
   disabled: boolean;
 }
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
 
 const NombreDeMots: FC<NombreDeMotsProps> = ({disabled}) => {
   const [startLength, setStartLength] = useState<number>(0)

@@ -1,4 +1,4 @@
-import { Roboto } from 'next/font/google';
+import { roboto } from '@/fonts/roboto';
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
@@ -8,10 +8,6 @@ type LettreInputProps = {
   typeLettres: "capitale"|"minuscule";
 }
 
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const LettreInput: FC<LettreInputProps> = ({letterInput, success, typeLettres}) => {
   return (

@@ -1,3 +1,4 @@
+import { josefinSans } from '@/fonts/josefinSans'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
 import Link from 'next/link'
 import React, { FC } from 'react'
@@ -13,8 +14,8 @@ const CardMenuGame: FC<CardMenuGameProps> = ({title, link}) => {
   const dispatch = useDispatch()
 
   return (
-    <Link href={`/${link}`} onClick={()=> dispatch(setShowUp(false))}>
-      <Card>
+    <Link href={`/${link}`} onClick={()=> dispatch(setShowUp(true))}>
+      <Card className={josefinSans.className}>
         {title}
       </Card>
     </Link>
@@ -30,6 +31,7 @@ const Card = styled.div`
   align-items: center;
   border-radius: 10px;
   background-color: white;
+  font-size: 20px;
 
   &:hover {
     background-color: yellow;

@@ -4,15 +4,11 @@ import { Rubik } from 'next/font/google'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { getOptions } from '@/store/slices/ecrisLeMotSlice'
+import { rubik } from '@/fonts/rubik'
 
 interface NiveauMotProps  {
   disabled: boolean;
 }
-
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
 
 const NiveauMots: FC<NiveauMotProps> = ({disabled}) => {
   const { options } = useSelector((state: RootState)=> state.ecrisLeMot)

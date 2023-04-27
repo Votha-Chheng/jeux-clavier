@@ -12,13 +12,10 @@ import LettreInput from '@/components/trouve-la-lettre/LettreInput'
 import { useKeyUpForLettersOnly } from '../../../hooks/useKeyUpForLettersOnly'
 import OptionsPanel from '@/components/shared-UI/OptionsPanel'
 import Options from '@/components/trouve-la-lettre/Options'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
-
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
+import { setShowUp } from '@/store/slices/optionsPanelSlice'
+import { roboto } from '@/fonts/roboto'
 
 const FindTheLetter: FC = () => {
   const [success, setSuccess] = useState<boolean|undefined>(undefined)
@@ -32,7 +29,9 @@ const FindTheLetter: FC = () => {
   
   const LETTERS = letters
   const { typeLettre } = useSelector((state: RootState)=> state.trouveLaLettre)
+  const { showUp } = useSelector((state: RootState)=> state.optionsPanel)
   const letterPressed =  useKeyUpForLettersOnly()
+  const dispatch = useDispatch()
   
   useEffect(()=> {
     if(success !== undefined){
@@ -86,10 +85,9 @@ const FindTheLetter: FC = () => {
 
   return (
     <MainStyle>
-      <OptionsPanel>
+      <OptionsPanel  onClickHandler={()=> dispatch(setShowUp(!showUp))}>
         <Options/>
       </OptionsPanel>
-      
       <ListLettres lettersSuccess={lettersLeft}/>
       <div>
         {

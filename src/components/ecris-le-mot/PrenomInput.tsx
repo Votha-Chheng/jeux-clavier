@@ -1,3 +1,4 @@
+import { roboto } from '@/fonts/roboto';
 import { RootState } from '@/store/store';
 import { Roboto } from 'next/font/google';
 import React, { FC } from 'react'
@@ -9,11 +10,6 @@ type PrenomInputProps = {
   lettersTapped: string[];
   wordSuccess: boolean;
 }
-
-const roboto = Roboto({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const PrenomInput: FC<PrenomInputProps> = ({success, lettersTapped, wordSuccess}) => {
   const { options  } = useSelector((state: RootState)=> state.ecrisLeMot)

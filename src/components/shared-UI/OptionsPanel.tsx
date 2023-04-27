@@ -4,7 +4,6 @@ import React, { FC } from 'react'
 import { useSelector } from 'react-redux';
 import styled from 'styled-components'
 
-
 type OptionsPanelProps = {
   children: JSX.Element;
   onClickHandler?: Function;
@@ -28,6 +27,7 @@ const OptionsSection = styled.section`
   margin: 0px auto;
   width: 950px;
   position: fixed;
+  top:0;
   left: calc((100% - 950px)/2);
   z-index: 5;
   border: 5px solid black;

@@ -4,7 +4,6 @@ import { displaySuccess } from '@/utils/displaySuccess'
 import { pickAListOfElements } from '@/utils/pickAListOfElements'
 import { removeElementWritten } from '@/utils/removeElementWritten'
 import PrenomsListe from '../../components/ecris-le-mot/PrenomsListe'
-import { Lato } from 'next/font/google'
 import PrenomInput from '@/components/ecris-le-mot/PrenomInput'
 import Bravo from '@/components/shared-UI/Bravo'
 import IconsFooter from '@/components/shared-UI/IconsFooter'
@@ -16,12 +15,7 @@ import { setShowUp } from '@/store/slices/optionsPanelSlice'
 import { getSelectedList } from '@/store/slices/ecrisLeMotSlice'
 import OptionsWriteWords from '@/components/ecris-le-mot/options/OptionsWriteWords'
 import CreateListPanel from '@/components/ecris-le-mot/options/CreateListPanel'
-
-
-const lato = Lato({
-  weight: '400',
-  subsets: ['latin'],
-})
+import { lato } from '@/fonts/lato'
 
 const EcrisLeMot: FC = () => {
   const [listeMots, setListeMots] = useState<string[]>([])
@@ -44,10 +38,6 @@ const EcrisLeMot: FC = () => {
   const { lengthOptions, typeMot,  uppercase, customListTrue, niveauMots } = options
 
   const dispatch = useDispatch()
-
-  useEffect(()=> {
-    dispatch(setShowUp(true))
-  }, [])  
   
   useEffect(()=> {
     const array = typeMot === "prénom" ? customPrenomsListArray : customMotsListArray

@@ -1,4 +1,5 @@
 import RadioInput from '@/components/shared-UI/RadioInput'
+import { rubik } from '@/fonts/rubik';
 import { Rubik } from 'next/font/google'
 import Image from 'next/image';
 import React, { Dispatch, FC, SetStateAction } from 'react'
@@ -8,10 +9,6 @@ interface OptionsTaquin {
   image: string;
   setImage: Dispatch<SetStateAction<string>>;
 }
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin']
-})
 
 const Options: FC<OptionsTaquin> = ({image, setImage}) => {
   return (

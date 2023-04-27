@@ -74,7 +74,6 @@ const Taquin: FC = () => {
   }
   
   useEffect(() => {
-    dispatch(setShowUp(true))
     setStart(false)
     dealSetterArray(ARRAY_SETTER, NUMBER_OF_PIECE)
 

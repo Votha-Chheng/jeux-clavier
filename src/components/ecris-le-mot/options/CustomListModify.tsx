@@ -7,6 +7,7 @@ import Image from 'next/image'
 import { ListeMotCustom, getModifyList } from '@/store/slices/ecrisLeMotSlice'
 import TagWord from './TagWord'
 import { modifyCustomListMots } from '@/store/slices/customListArray'
+import { rubik } from '@/fonts/rubik'
 
 interface CustomListModifyProps {
   handleWordValidation: Function;
@@ -17,11 +18,6 @@ interface CustomListModifyProps {
   handleDeleteWordFromListe: Function;
   wordExists: boolean;
 }
-
-const rubik = Rubik({
-  weight: "400",
-  subsets: ["latin"]
-})
 
 const CustomListModify: FC<CustomListModifyProps> = ({ handleWordValidation, motInput, listeMots, setListeMots, handleChangeWordInput, handleDeleteWordFromListe, wordExists }) => {
   const [nomListe, setNomListe] = useState<string>("")

@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import TagWord from './TagWord'
 import { addCustomList } from '@/store/slices/customListArray'
+import { rubik } from '@/fonts/rubik'
 
 interface CreateListComponentProps {
   handleWordValidation: Function;
@@ -17,11 +18,6 @@ interface CreateListComponentProps {
   handleChangeWordInput: Function;
   handleDeleteWordFromListe: Function;
 }
-
-const rubik = Rubik({
-  weight: "400",
-  subsets: ["latin"]
-})
 
 const CreateListComponent: FC<CreateListComponentProps> = ({handleWordValidation, motInput, listeMots, setListeMots, wordExists, handleChangeWordInput, handleDeleteWordFromListe}) => {
   const [nomListe, setNomListe] = useState<string>("")

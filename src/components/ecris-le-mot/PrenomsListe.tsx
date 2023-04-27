@@ -1,3 +1,4 @@
+import { rubik } from '@/fonts/rubik';
 import { RootState } from '@/store/store';
 import { Rubik } from 'next/font/google';
 import React, { FC } from 'react'
@@ -8,11 +9,6 @@ type PrenomsListeProps = {
   fullList: string[];
   listePrenomsEcrits: string[]
 }
-
-const rubik = Rubik({
-  weight: '400',
-  subsets: ['latin'],
-})
 
 const PrenomsListe: FC<PrenomsListeProps> = ({fullList, listePrenomsEcrits}) => {
   const { options } = useSelector((state: RootState)=> state.ecrisLeMot)
