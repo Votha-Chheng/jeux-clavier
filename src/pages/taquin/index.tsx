@@ -6,9 +6,10 @@ import Options from '@/components/taquin/options/Options';
 import { NUMBER_OF_PIECE } from '@/datas/taquin/arrayPieces';
 import { setShowUp } from '@/store/slices/optionsPanelSlice';
 import { RootState } from '@/store/store';
+import { dealSetterArray } from '@/utils/dealSetterArray';
 import { shuffleArrayPiece } from '@/utils/shuffleArrayPiece';
 import Image from 'next/image';
-import React, { Dispatch, FC, SetStateAction, useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import styled from 'styled-components'
 
@@ -57,6 +58,7 @@ const Taquin: FC = () => {
   useEffect(() => { setMounted(true) }, []);  // avoid hydration issues - run on client
 
   const resetTaquin = ()=> {
+    setEnd(false)
     setStart(false)
     dealSetterArray(ARRAY_SETTER, NUMBER_OF_PIECE)
 
@@ -67,13 +69,8 @@ const Taquin: FC = () => {
     }, 2000)
   }
 
-  const dealSetterArray = (setterArray: Dispatch<SetStateAction<number>>[], shuffleArray: number[]): void=> {
-    for (let i=0; i<9; i++){
-      setterArray[i](shuffleArray[i])
-    }
-  }
-  
   useEffect(() => {
+    setEnd(false)
     setStart(false)
     dealSetterArray(ARRAY_SETTER, NUMBER_OF_PIECE)
 
@@ -111,7 +108,7 @@ const Taquin: FC = () => {
         }
         
         <div className='casse-tete-container'>
-          <CasseTete image={image} setEnd={setEnd} setStart={setStart} start={start} end={end} arrayOfSetter={ARRAY_SETTER} arrayOfStates={ARRAY_STATES} />
+          <CasseTete image={image} setEnd={setEnd} start={start} end={end} arrayOfSetter={ARRAY_SETTER} arrayOfStates={ARRAY_STATES} />
         </div>
       </div>
       <IconsFooter end={false} reset={()=>resetTaquin()} marginTop='30px' />

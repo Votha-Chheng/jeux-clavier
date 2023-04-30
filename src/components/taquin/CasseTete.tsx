@@ -8,14 +8,13 @@ import { NUMBER_OF_PIECE } from '@/datas/taquin/arrayPieces'
 
 interface CasseTeteProps {
   setEnd: Dispatch<SetStateAction<boolean>>;
-  setStart: Dispatch<SetStateAction<boolean>>;
   start: boolean;
   end: boolean;
   image: string;
   arrayOfStates: number[];
   arrayOfSetter: Dispatch<SetStateAction<number>>[];
 }
-const CasseTete: FC<CasseTeteProps> = ({setEnd, setStart, start, end, image, arrayOfStates, arrayOfSetter}) => {
+const CasseTete: FC<CasseTeteProps> = ({setEnd, start, end, image, arrayOfStates, arrayOfSetter}) => {
 
   const IMAGE_POSITIONS: ImagePiece[] = NUMBER_OF_PIECE.map((pieceNumber: number, index: number)=> ({
     position: pieceNumber,

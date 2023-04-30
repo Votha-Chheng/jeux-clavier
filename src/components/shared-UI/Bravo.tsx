@@ -1,9 +1,14 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 
-const Bravo: FC = () => {
+interface BravoProps{
+  marginTop?: string;
+  fontSize?: string
+}
+
+const Bravo: FC<BravoProps> = ({marginTop = "75px", fontSize =" 250px"}) => {
   return (
-    <H1>
+    <H1 style={{marginTop}}>
       Bravo
     </H1>
   )
@@ -14,7 +19,6 @@ const H1 = styled.h1`
   text-align: center;
   margin-top: 75px;
   color: green;
-  font-size: 250px;
     
 `
 

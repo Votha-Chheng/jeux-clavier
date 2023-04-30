@@ -33,6 +33,38 @@ export const indexToPosition = (index: number): PositionPiece => {
   return {topPosition, leftPosition}
 }
 
+export const indexToPositionPuzzle = (index: number, nbPieces: number): PositionPiece => {
+  let topPosition: number = 0
+  let leftPosition: number = 0
+
+  if(nbPieces === 9){
+    topPosition = indexToPosition(index).topPosition
+    leftPosition = indexToPosition(index).leftPosition
+
+  } else if(nbPieces === 12) {
+    leftPosition = (index%4)*125
+    if(index<4){
+      topPosition = 0
+    } else if(index>=4 && index<8){
+      topPosition = 150
+    } else {
+      topPosition = 300
+    }
+  } else {
+    leftPosition = (index%4)*125
+    if(index<4){
+      topPosition = 0
+    } else if(index>=4 && index<8){
+      topPosition = 125
+    } else if(index>=8 && index<12){
+      topPosition = 250
+    } else {
+      topPosition = 375
+    }
+  } 
+  return {topPosition, leftPosition}
+}
+
 
 
 export const positionToIndex = (position: PositionPiece): number => {
