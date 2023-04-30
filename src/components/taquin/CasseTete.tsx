@@ -4,7 +4,7 @@ import PieceImage from './PieceImage'
 import { ImagePiece } from '@/types/imagePiece'
 import { indexToPosition } from '@/utils/indexToPosition'
 import { isClickable } from '@/utils/isClickable'
-import { NUMBER_OF_PIECE } from '@/datas/taquin/arrayPieces'
+import { getArrayOfNumbers } from '@/utils/getArrayOfNumbers'
 
 interface CasseTeteProps {
   setEnd: Dispatch<SetStateAction<boolean>>;
@@ -16,7 +16,7 @@ interface CasseTeteProps {
 }
 const CasseTete: FC<CasseTeteProps> = ({setEnd, start, end, image, arrayOfStates, arrayOfSetter}) => {
 
-  const IMAGE_POSITIONS: ImagePiece[] = NUMBER_OF_PIECE.map((pieceNumber: number, index: number)=> ({
+  const IMAGE_POSITIONS: ImagePiece[] = getArrayOfNumbers(9).map((pieceNumber: number, index: number)=> ({
     position: pieceNumber,
     top: indexToPosition(index).topPosition,
     left: indexToPosition(index).leftPosition

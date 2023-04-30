@@ -4,7 +4,7 @@ import OptionsPuzzleSwitch from '@/components/puzzle-switch/options/OptionsPuzzl
 import Bravo from '@/components/shared-UI/Bravo'
 import IconsFooter from '@/components/shared-UI/IconsFooter'
 import OptionsPanel from '@/components/shared-UI/OptionsPanel'
-import { NUMBER_OF_PIECE } from '@/datas/taquin/arrayPieces'
+import { roboto } from '@/fonts/roboto'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
 import { RootState } from '@/store/store'
 import { dealSetterArray } from '@/utils/dealSetterArray'
@@ -17,6 +17,9 @@ import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 
 const PuzzleSwitch: FC = () => {
+  const [levelMode, setLevelMode] = useState<boolean>(false)
+  const [level, setLevel] = useState<number>(0)
+  const [nextLevel, setNextLevel] = useState<boolean>(false)
   const [nbPieces, setNbPieces] = useState<number>(9)
   const [start, setStart] = useState<boolean>(false)
   const [end, setEnd] = useState<boolean>(false)
@@ -70,7 +73,6 @@ const PuzzleSwitch: FC = () => {
     setPositionTemporaireElement15
   ])
 
-
   const ARRAY_STATES_9 = [
     positionTemporaireElement0,
     positionTemporaireElement1,
@@ -97,17 +99,54 @@ const PuzzleSwitch: FC = () => {
   ])
 
   useEffect(()=> {
-    setStart(false)
-    setEnd(false)
-    setPositionToSwitch({positionTemporaire: null, index: null})
-    dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), getArrayOfNumbers(nbPieces))
+    if(levelMode){
+      setLevel(0)
+    }
+    //fin  du mode aventure
+  }, [levelMode, showUp])
 
-    setTimeout(()=> {
-      const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(nbPieces))
-      dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), arrayShuffled)
-      setStart(true)
-    }, 2000)
-  }, [nbPieces, image])
+  useEffect(()=> {
+    if(levelMode){
+      if(level !== 8){
+        setImage(`taquin-${level+1}.png`)
+      }
+    }
+    //fin  du mode aventure
+  }, [level, levelMode, nextLevel])
+
+  useEffect(()=> {
+    if(levelMode){
+      if(nextLevel){
+        setStart(false)
+        setEnd(false)
+        setPositionToSwitch({positionTemporaire: null, index: null})
+        dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), getArrayOfNumbers(nbPieces))
+      } else {
+        setTimeout(()=> {
+          const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(nbPieces))
+          dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), arrayShuffled)
+          setStart(true)
+        }, 2000)
+      }
+    }
+  }, [nbPieces, image, levelMode, nextLevel])
+
+  useEffect(()=> {
+    if(!levelMode){
+
+      setStart(false)
+      setEnd(false)
+      setPositionToSwitch({positionTemporaire: null, index: null})
+      dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), getArrayOfNumbers(nbPieces))
+    
+      setTimeout(()=> {
+        const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(nbPieces))
+        dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), arrayShuffled)
+        setStart(true)
+      }, 2000)
+      
+    }
+  }, [nbPieces, image, levelMode, nextLevel])
 
   useEffect(()=> {
     if(((positionToSwitch.positionTemporaire !== null) && positionToSwitch.index !== null) && ((targetPosition.positionTemporaire !== null) && targetPosition.index !== null)){      
@@ -138,27 +177,48 @@ const PuzzleSwitch: FC = () => {
   useEffect(()=> {
     //Le jeu se termine si la position temporaire de chaque pièce est égale à sa propriété position
     if(checkFinPuzzle(returnArrayStates(nbPieces, ARRAY_STATES_9, ARRAY_STATES_12, ARRAY_STATES_16)) && start){
-      setEnd(true)
+      if(levelMode){
+        if(level>=8){
+          setEnd(true)
+        } else {
+          setNextLevel(true)
+        }    
+      } else {
+        setEnd(true)
+      }
     }
-  }, [checkFinPuzzle])
+  }, [checkFinPuzzle, start, levelMode, level])
 
   const resetPuzzle = ()=> {
+    if(levelMode){
+      setLevel(0)
+      setNextLevel(false)
+    }
     setPositionToSwitch({positionTemporaire: null, index: null})
+    setTargetPosition({positionTemporaire: null, index: null})
     setEnd(false)
     setStart(false)
-    dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), NUMBER_OF_PIECE)
+    dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), getArrayOfNumbers(nbPieces))
 
     setTimeout(()=> {
-      const arrayShuffled: number[] = shuffleArrayPiece(NUMBER_OF_PIECE)
+      const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(nbPieces))
       dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), arrayShuffled)
       setStart(true)
     }, 2000)
+
   }
 
   useEffect(()=> {
     setMounted(true)
   }, [])
 
+  const goToNextLevel = (event: any)=> {
+    event.preventDefault()
+    setLevel(prev=> prev+1)
+    setStart(false)
+    setNextLevel(false)
+    
+  }
 
   if(!mounted) return null
 
@@ -166,9 +226,14 @@ const PuzzleSwitch: FC = () => {
     <GameContainerLayout>
       <PuzzleSwitchStyle>
         <OptionsPanel onClickHandler={()=> dispatch(setShowUp(!showUp))}>
-          <OptionsPuzzleSwitch setImage={setImage} image={image} setNbPieces={setNbPieces} nbPieces={nbPieces} />
+          <OptionsPuzzleSwitch setImage={setImage} image={image} setNbPieces={setNbPieces} nbPieces={nbPieces} levelMode={levelMode} setLevelMode={setLevelMode} />
         </OptionsPanel>
         {
+          nextLevel ?
+          <div className={roboto.className + ' next'} onClick={(event)=> goToNextLevel(event)}>
+            Puzzle suivant &rsaquo;&rsaquo;
+          </div>
+          :
           end 
           ?
           <Bravo marginTop='0'/>
@@ -188,8 +253,9 @@ const PuzzleSwitch: FC = () => {
           start={start}
           end={end}
           nbPieces={nbPieces}
+          nextLevel={nextLevel}
         />
-        <IconsFooter reset={()=>resetPuzzle()} marginTop='30px' />
+        <IconsFooter style={{pointerEvents: `${((level === 8 && end) || !levelMode) ? "auto": "none"}`, opacity: `${((level === 8 && end) || !levelMode)? "1" : "0.5"}` }} reset={()=>resetPuzzle()} marginTop='30px' />
       </PuzzleSwitchStyle>
     </GameContainerLayout>
   )
@@ -203,6 +269,23 @@ const PuzzleSwitchStyle = styled.div`
   .img-container{
     display: flex;
     justify-content: center;
+  }
+
+  .next{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 120px;
+    font-size: 50px;
+    color: green;
+    margin-top: 20px;
+    font-weight: bold;
+    border: 3px solid green;
+    width: 400px;
+    background-color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    margin: 20px auto 0;
   }
 `
 

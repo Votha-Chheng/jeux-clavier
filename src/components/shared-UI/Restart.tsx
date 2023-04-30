@@ -1,14 +1,15 @@
 import Image from 'next/image'
-import React, { FC } from 'react'
+import React, { CSSProperties, FC } from 'react'
 import styled from 'styled-components'
 
 type RestartProps = {
-  reset: Function
+  reset: Function;
+  style: CSSProperties;
 }
 
-const Restart: FC<RestartProps> = ({reset}) => {
+const Restart: FC<RestartProps> = ({reset, style}) => {
   return (
-    <RestartButton onClick={()=> reset()}>
+    <RestartButton style={style} onClick={()=> reset()}>
       <Image src='/images/refresh.svg' alt='Recommencer' width={50} height={50}/>
     </RestartButton>
   )

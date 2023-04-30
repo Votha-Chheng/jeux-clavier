@@ -15,9 +15,10 @@ interface PuzzleProps {
   start: boolean;
   end: boolean;
   image: string;
+  nextLevel: boolean;
 }
 
-const Puzzle: FC<PuzzleProps> = ({ arrayOfStates, positionToSwitch, setPositionToSwitch, targetPosition, setTargetPosition, start, end, image, nbPieces }) => {
+const Puzzle: FC<PuzzleProps> = ({ arrayOfStates, positionToSwitch, setPositionToSwitch, targetPosition, setTargetPosition, start, end, image, nbPieces, nextLevel }) => {
   
   const IMAGE_POSITIONS: ImagePiece[] = Array.from(Array(nbPieces).keys()).map((pieceNumber: number, index: number)=> ({
     position: pieceNumber,
@@ -46,6 +47,7 @@ const Puzzle: FC<PuzzleProps> = ({ arrayOfStates, positionToSwitch, setPositionT
             targetPosition={targetPosition}
             setTargetPosition={setTargetPosition}
             nbPieces={nbPieces}
+            nextLevel={nextLevel}
           />
         ))
       }

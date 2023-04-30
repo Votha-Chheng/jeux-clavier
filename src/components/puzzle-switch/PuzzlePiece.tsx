@@ -15,9 +15,10 @@ interface PuzzlePieceProps{
   index:number;
   end: boolean;
   nbPieces: number;
+  nextLevel: boolean;
 }
 
-const PuzzlePiece: FC<PuzzlePieceProps> = ( {positionTemporaire, positionImage, image, setPositionToSwitch, positionToSwitch, setTargetPosition, index, end, nbPieces }) => {
+const PuzzlePiece: FC<PuzzlePieceProps> = ( {positionTemporaire, positionImage, image, setPositionToSwitch, positionToSwitch, setTargetPosition, index, end, nbPieces, nextLevel }) => {
 
   const selectPosition = (positionToSwitch: number|null, positionTemporaire: number)=> {
     if(positionToSwitch === positionTemporaire){
@@ -31,7 +32,7 @@ const PuzzlePiece: FC<PuzzlePieceProps> = ( {positionTemporaire, positionImage, 
 
   return (
     <PiecePuzzleStyle 
-      className={`${positionToSwitch.positionTemporaire === positionTemporaire ? "selected": "unselected"} ${end ? " end":""}`}
+      className={`${positionToSwitch.positionTemporaire === positionTemporaire ? "selected": "unselected"} ${end || nextLevel ? " end":""}`}
       onClick={()=>selectPosition(positionToSwitch.positionTemporaire, positionTemporaire)} 
       style={{
         width: `${nbPieces === 9 ? "150px" : "125px"}`,
@@ -40,7 +41,11 @@ const PuzzlePiece: FC<PuzzlePieceProps> = ( {positionTemporaire, positionImage, 
         left:`${indexToPositionPuzzle(positionTemporaire, nbPieces).leftPosition}px`,
       }}
     >
-      <Image src={`/images/${image}`} alt= "image sélectionnnée" width={nbPieces === 9 ?  450: 500} height={nbPieces === 16 ? 500 : 450} style={{transform: `translate(${-positionImage.left}px, ${-positionImage.top}px)`, transition:"all 0.4s ease-out"}}/>
+      <Image 
+        src={`/images/${image}`} 
+        alt= "image sélectionnnée" 
+        width={nbPieces === 9 ?  450: 500} height={nbPieces === 16 ? 500 : 450} style={{transform: `translate(${-positionImage.left}px, ${-positionImage.top}px)`, transition:"all 0.4s ease-out"}}
+      />
     </PiecePuzzleStyle>
     
   )

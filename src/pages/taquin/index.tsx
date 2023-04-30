@@ -3,10 +3,10 @@ import IconsFooter from '@/components/shared-UI/IconsFooter';
 import OptionsPanel from '@/components/shared-UI/OptionsPanel';
 import CasseTete from '@/components/taquin/CasseTete';
 import Options from '@/components/taquin/options/Options';
-import { NUMBER_OF_PIECE } from '@/datas/taquin/arrayPieces';
 import { setShowUp } from '@/store/slices/optionsPanelSlice';
 import { RootState } from '@/store/store';
 import { dealSetterArray } from '@/utils/dealSetterArray';
+import { getArrayOfNumbers } from '@/utils/getArrayOfNumbers';
 import { shuffleArrayPiece } from '@/utils/shuffleArrayPiece';
 import Image from 'next/image';
 import React, { FC, useEffect, useState } from 'react'
@@ -60,10 +60,10 @@ const Taquin: FC = () => {
   const resetTaquin = ()=> {
     setEnd(false)
     setStart(false)
-    dealSetterArray(ARRAY_SETTER, NUMBER_OF_PIECE)
+    dealSetterArray(ARRAY_SETTER, getArrayOfNumbers(9))
 
     setTimeout(()=> {
-      const arrayShuffled: number[] = shuffleArrayPiece(NUMBER_OF_PIECE)
+      const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(9))
       dealSetterArray(ARRAY_SETTER, arrayShuffled)
       setStart(true)
     }, 2000)
@@ -72,10 +72,10 @@ const Taquin: FC = () => {
   useEffect(() => {
     setEnd(false)
     setStart(false)
-    dealSetterArray(ARRAY_SETTER, NUMBER_OF_PIECE)
+    dealSetterArray(ARRAY_SETTER, getArrayOfNumbers(9))
 
     setTimeout(()=> {
-      const arrayShuffled: number[] = shuffleArrayPiece(NUMBER_OF_PIECE)
+      const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(9))
       dealSetterArray(ARRAY_SETTER, arrayShuffled)
       setStart(true)
     }, 2000)
