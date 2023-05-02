@@ -116,6 +116,7 @@ const PuzzleSwitch: FC = () => {
 
   useEffect(()=> {
     if(levelMode){
+      setEnd(false)
       if(nextLevel){
         setStart(false)
         setEnd(false)
@@ -126,14 +127,14 @@ const PuzzleSwitch: FC = () => {
           const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(nbPieces))
           dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), arrayShuffled)
           setStart(true)
-        }, 2000)
+        }, 1000)
       }
     }
-  }, [nbPieces, image, levelMode, nextLevel])
+  }, [nbPieces, image, levelMode, nextLevel, showUp])
 
   useEffect(()=> {
     if(!levelMode){
-
+      setNextLevel(false)
       setStart(false)
       setEnd(false)
       setPositionToSwitch({positionTemporaire: null, index: null})
@@ -143,10 +144,10 @@ const PuzzleSwitch: FC = () => {
         const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(nbPieces))
         dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), arrayShuffled)
         setStart(true)
-      }, 2000)
+      }, 1000)
       
     }
-  }, [nbPieces, image, levelMode, nextLevel])
+  }, [nbPieces, image, levelMode, nextLevel, showUp])
 
   useEffect(()=> {
     if(((positionToSwitch.positionTemporaire !== null) && positionToSwitch.index !== null) && ((targetPosition.positionTemporaire !== null) && targetPosition.index !== null)){      
@@ -178,7 +179,8 @@ const PuzzleSwitch: FC = () => {
     //Le jeu se termine si la position temporaire de chaque pièce est égale à sa propriété position
     if(checkFinPuzzle(returnArrayStates(nbPieces, ARRAY_STATES_9, ARRAY_STATES_12, ARRAY_STATES_16)) && start){
       if(levelMode){
-        if(level>=8){
+        console.log(level)
+        if(level>6){
           setEnd(true)
         } else {
           setNextLevel(true)
@@ -187,7 +189,7 @@ const PuzzleSwitch: FC = () => {
         setEnd(true)
       }
     }
-  }, [checkFinPuzzle, start, levelMode, level])
+  }, [checkFinPuzzle, start, levelMode, level, nextLevel])
 
   const resetPuzzle = ()=> {
     if(levelMode){
@@ -228,20 +230,22 @@ const PuzzleSwitch: FC = () => {
         <OptionsPanel onClickHandler={()=> dispatch(setShowUp(!showUp))}>
           <OptionsPuzzleSwitch setImage={setImage} image={image} setNbPieces={setNbPieces} nbPieces={nbPieces} levelMode={levelMode} setLevelMode={setLevelMode} />
         </OptionsPanel>
+        <section className='img-container'>
         {
-          nextLevel ?
+          nextLevel 
+          ?
           <div className={roboto.className + ' next'} onClick={(event)=> goToNextLevel(event)}>
             Puzzle suivant &rsaquo;&rsaquo;
           </div>
+        
           :
           end 
           ?
           <Bravo marginTop='0'/>
           :
-          <section className='img-container'>
-            <Image src={`/images/${image}`} alt="Image sélectionnée" width={240} height={240} placeholder="blur" blurDataURL={`/images/mini-${image}`} />
-          </section>
+          <Image src={`/images/${image}`} alt="Image sélectionnée" width={240} height={240} placeholder="blur" blurDataURL={`/images/mini-${image}`} />
         }
+        </section>
         <Puzzle 
           image={image}
           arrayOfSetter={returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16)} 
@@ -255,7 +259,7 @@ const PuzzleSwitch: FC = () => {
           nbPieces={nbPieces}
           nextLevel={nextLevel}
         />
-        <IconsFooter style={{pointerEvents: `${((level === 8 && end) || !levelMode) ? "auto": "none"}`, opacity: `${((level === 8 && end) || !levelMode)? "1" : "0.5"}` }} reset={()=>resetPuzzle()} marginTop='30px' />
+        <IconsFooter style={{pointerEvents: `${((level === 7 && end) || !levelMode) ? "auto": "none"}`, opacity: `${((level === 7 && end) || !levelMode)? "1" : "0.5"}` }} reset={()=>resetPuzzle()} marginTop='30px' />
       </PuzzleSwitchStyle>
     </GameContainerLayout>
   )
@@ -269,6 +273,7 @@ const PuzzleSwitchStyle = styled.div`
   .img-container{
     display: flex;
     justify-content: center;
+    height: 240px;
   }
 
   .next{
