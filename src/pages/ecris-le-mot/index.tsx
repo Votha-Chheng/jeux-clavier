@@ -40,10 +40,10 @@ const EcrisLeMot: FC = () => {
   const dispatch = useDispatch()
   
   useEffect(()=> {
-    const array = typeMot === "prénom" ? customPrenomsListArray : customMotsListArray
+    const array = (typeMot === "prénom") ? customPrenomsListArray : customMotsListArray
     dispatch(getSelectedList({listeMotCustom: array, customListTrue}))      
     
-  }, [customListTrue, typeMot, selectedCustomListName, customMotsListArray, customPrenomsListArray])
+  }, [customListTrue, typeMot, selectedCustomListName, customMotsListArray, customPrenomsListArray, niveauMots])
 
   useEffect(()=> {
     if(listeMotsRestants.length>0 && listeMotsRestants !== undefined){
@@ -62,7 +62,7 @@ const EcrisLeMot: FC = () => {
     setListeMotsRestants(liste)
     setLettersLeft([])
 
-  }, [selectedList, lengthOptions])
+  }, [selectedList, lengthOptions, niveauMots])
 
 
   useEffect(()=> {
