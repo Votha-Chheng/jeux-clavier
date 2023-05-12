@@ -1,5 +1,5 @@
 import { ImagePiece } from '@/types/imagePiece';
-import { indexToPosition, indexToPositionPuzzle } from '@/utils/indexToPosition'
+import { indexToPositionPuzzle } from '@/utils/indexToPosition'
 import Image from 'next/image';
 import React, { Dispatch, FC, SetStateAction } from 'react'
 import styled from 'styled-components'
@@ -42,7 +42,7 @@ const PuzzlePiece: FC<PuzzlePieceProps> = ( {positionTemporaire, positionImage, 
       }}
     >
       <Image 
-        src={`/images/${image}`} 
+        src={`/images/puzzles/${image}`} 
         alt= "image sélectionnnée" 
         width={nbPieces === 9 ?  450: 500} height={nbPieces === 16 ? 500 : 450} style={{transform: `translate(${-positionImage.left}px, ${-positionImage.top}px)`, transition:"all 0.4s ease-out"}}
       />
@@ -60,6 +60,7 @@ const PiecePuzzleStyle= styled.div`
   width: 150px;
   transition: top 0.25s linear, left 0.25s linear, border 0.1s linear;
   transform-origin: top left;
+  user-select: none;
 
   &.end{
     pointer-events: none;

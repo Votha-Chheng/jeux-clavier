@@ -103,7 +103,7 @@ const Taquin: FC = () => {
             <div className='vertical two' />
             <div className='horizontal one' />
             <div className='horizontal two' />
-            <Image src={`/images/mini-${image}`} alt="Image sélectionnée" width={240} height={240} placeholder="blur" blurDataURL='/images/taquin-1-mini.png' />
+            <Image src={`/images/puzzles/mini-${image}`} alt="Image sélectionnée" width={240} height={240} placeholder="blur" blurDataURL='/images/puzzles/taquin-1-mini.png' />
           </section>
         }
         

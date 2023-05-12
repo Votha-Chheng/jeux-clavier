@@ -60,7 +60,7 @@ const CasseTete: FC<CasseTeteProps> = ({setEnd, start, end, image, arrayOfStates
             key={index}
             positionTemporaire={arrayOfStates[index]}
             positionImage={IMAGE_POSITIONS[index]}
-            handleClick={()=> (!start || index===6) ? console.log("empty div") : switchPosition(arrayOfStates[index], arrayOfSetter[index])}
+            handleClick={()=> (!start || index===6) ? null : switchPosition(arrayOfStates[index], arrayOfSetter[index])}
             isClickable={ (!start || index===6 || end) ? false : isClickable(arrayOfStates[6], arrayOfStates[index])}
             isEmpty={index===6}
             image={image}

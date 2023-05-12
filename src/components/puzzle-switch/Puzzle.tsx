@@ -26,9 +26,6 @@ const Puzzle: FC<PuzzleProps> = ({ arrayOfStates, positionToSwitch, setPositionT
     left: indexToPositionPuzzle(index, nbPieces).leftPosition
   }))
 
-  console.log(IMAGE_POSITIONS)
-
-
   return (
     <PuzzleStyle 
       className={`${end || !start ? "end" : ""}`}

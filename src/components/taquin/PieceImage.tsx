@@ -27,7 +27,7 @@ const PieceImage: FC<PieceImageProps> = ({positionTemporaire, isEmpty=false, pos
       {
         isEmpty 
         ? null 
-        :<Image src={`/images/${image}`} alt= "image sélectionnnée" width={450} height={450} style={{transform: `translate(${-positionImage.left}px, ${-positionImage.top}px`, transition:"all 0.5s ease-out"}}
+        :<Image src={`/images/puzzles/${image}`} alt= "image sélectionnnée" width={450} height={450} style={{transform: `translate(${-positionImage.left}px, ${-positionImage.top}px`, transition:"all 0.5s ease-out"}}
         />
       }
     </PieceImageDivStyle>

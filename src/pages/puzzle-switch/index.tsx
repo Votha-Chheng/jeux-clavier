@@ -130,7 +130,7 @@ const PuzzleSwitch: FC = () => {
         }, 1000)
       }
     }
-  }, [nbPieces, image, levelMode, nextLevel, showUp])
+  }, [nextLevel, showUp])
 
   useEffect(()=> {
     if(!levelMode){
@@ -147,7 +147,7 @@ const PuzzleSwitch: FC = () => {
       }, 1000)
       
     }
-  }, [nbPieces, image, levelMode, nextLevel, showUp])
+  }, [showUp])
 
   useEffect(()=> {
     if(((positionToSwitch.positionTemporaire !== null) && positionToSwitch.index !== null) && ((targetPosition.positionTemporaire !== null) && targetPosition.index !== null)){      
@@ -243,7 +243,7 @@ const PuzzleSwitch: FC = () => {
           ?
           <Bravo marginTop='0'/>
           :
-          <Image src={`/images/${image}`} alt="Image sélectionnée" width={240} height={240} placeholder="blur" blurDataURL={`/images/mini-${image}`} />
+          <Image src={`/images/puzzles/${image}`} alt="Image sélectionnée" width={240} height={240} placeholder="blur" blurDataURL={`/images/puzzles/mini-${image}`} />
         }
         </section>
         <Puzzle 

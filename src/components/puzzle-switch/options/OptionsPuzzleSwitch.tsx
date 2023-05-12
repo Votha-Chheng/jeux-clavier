@@ -69,7 +69,7 @@ const OptionsPuzzleSwitch: FC<OptionsPuzzleSwitchProps> = ({ image, setImage, se
               isChecked={image===`taquin-${number+1}.png`}
               id={image}
               handleClick={()=> setImage(`taquin-${number+1}.png`)}
-              value={<Image src={`/images/mini-taquin-${number+1}.png`} width={150} height={150} alt={image} style={{opacity: `${levelMode ? "0.5": "1"}`}} />}
+              value={<Image src={`/images/puzzles/mini-taquin-${number+1}.png`} width={150} height={150} alt={image} style={{opacity: `${levelMode ? "0.5": "1"}`}} />}
             />
           ))
         }
