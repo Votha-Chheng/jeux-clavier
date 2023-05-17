@@ -1,3 +1,4 @@
+import { JigsawPiece } from "@/types/jigsawPiece";
 import { PositionPiece } from "@/types/positionPiece";
 
 const switchFunction = (left: number, first: number, second: number, third: number) : number=> {
@@ -33,7 +34,7 @@ export const indexToPosition = (index: number): PositionPiece => {
   return {topPosition, leftPosition}
 }
 
-export const indexToPositionPuzzle = (index: number, nbPieces: number): PositionPiece => {
+export const indexToPositionPuzzle = (index: number, nbPieces: number, piece?: JigsawPiece): PositionPiece => {
   let topPosition: number = 0
   let leftPosition: number = 0
 

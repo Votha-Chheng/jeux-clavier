@@ -1,5 +1,5 @@
 import LetterTag from '@/components/range-alphabet/LetterTag'
-import { positionTags } from '@/datas/range-alphabet/positionTags'
+import { positionTags } from '@/utils/positionTags'
 import { letters } from '@/datas/trouve-la-lettre/letters'
 import GameContainerLayout from '@/components/layouts/GameContainerLayout'
 import React, { FC, useEffect, useState } from 'react'
@@ -60,7 +60,7 @@ const RangeAlphabet: FC = () => {
               key={index} 
               isGrabbing={isGrabbing} 
               letter={letter} 
-              position={positionTags(heightDimension, 950, 7.5, 110, letters)[index]} 
+              position={positionTags(heightDimension, 950, 7.5, 110, letters, 90)[index]} 
               setLetterHovered={setLetterHovered} 
               lettersLeft={lettersLeft} />
           ))
@@ -78,7 +78,7 @@ const RangeAlphabet: FC = () => {
               startAlphabet={startAlphabet}
               nbLettresARanger={nbLettresARanger}
               letter={letter} 
-              position={positionTags(heightDimension, 950, 1.75, 90, startAlphabet)[index]} 
+              position={positionTags(heightDimension, 950, 1.75, 90, startAlphabet, 90)[index]} 
               setIsGrabbing={setIsGrabbing} 
               letterHovered={letterHovered} 
               setLettersLeft={setLettersLeft} 

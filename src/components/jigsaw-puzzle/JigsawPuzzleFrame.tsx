@@ -1,16 +1,27 @@
+import { PositionPiece } from '@/types/positionPiece';
+import { returnFrameSize } from '@/utils/returnFrameSize';
 import Image from 'next/image';
-import React, { FC } from 'react'
+import React, { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react'
 import styled from 'styled-components'
 
 interface JigsawPuzzleFrameProps {
   nbPieces: number;
   image: string;
+  setFramePosition: Dispatch<SetStateAction<PositionPiece>>;
 }
 
-const JigsawPuzzleFrame: FC<JigsawPuzzleFrameProps> = ({ nbPieces, image }) => {
+const JigsawPuzzleFrame: FC<JigsawPuzzleFrameProps> = ({ nbPieces, image, setFramePosition }) => {
+  const frameRef = useRef<HTMLDivElement>(null)
+
+  useEffect(()=> {
+    if(frameRef.current){
+      setFramePosition({topPosition: frameRef.current.offsetTop, leftPosition:  frameRef.current.offsetLeft})
+    }
+  }, [])
+
   return (
-    <JigsawPuzzleFrameStyle style={nbPieces === 9 ? {width: "450px", height: "450px" }:{}}>
-      <Image src={`/images/${image}`} width={nbPieces === 9 ? 450 : 0} alt={image} height={nbPieces === 9 ? 450 : 0} />
+    <JigsawPuzzleFrameStyle style={{width: `${returnFrameSize(nbPieces).width}px`, height: `${returnFrameSize(nbPieces).height}px`}} ref={frameRef}>
+      <Image src={`/images/jigsaw/${image}`} width={500} alt={image} height={500} priority />
     </JigsawPuzzleFrameStyle>
   )
 }
@@ -18,10 +29,11 @@ const JigsawPuzzleFrame: FC<JigsawPuzzleFrameProps> = ({ nbPieces, image }) => {
 const JigsawPuzzleFrameStyle = styled.div`
   margin: 15px auto;
   outline: 2px solid black;
+  overflow: hidden;
 
   img{
-    opacity: 0.35;
-    filter: grayscale(0.9);
+    opacity: 0.5;
+    filter: grayscale(0.75) brightness(140%);
   }
 `
 

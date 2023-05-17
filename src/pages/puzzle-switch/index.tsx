@@ -3,6 +3,7 @@ import Puzzle from '@/components/puzzle-switch/Puzzle'
 import OptionsPuzzleSwitch from '@/components/puzzle-switch/options/OptionsPuzzleSwitch'
 import Bravo from '@/components/shared-UI/Bravo'
 import IconsFooter from '@/components/shared-UI/IconsFooter'
+import NextButton from '@/components/shared-UI/NextButton'
 import OptionsPanel from '@/components/shared-UI/OptionsPanel'
 import { roboto } from '@/fonts/roboto'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
@@ -121,6 +122,7 @@ const PuzzleSwitch: FC = () => {
         setStart(false)
         setEnd(false)
         setPositionToSwitch({positionTemporaire: null, index: null})
+        setTargetPosition({positionTemporaire: null, index: null})
         dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), getArrayOfNumbers(nbPieces))
       } else {
         setTimeout(()=> {
@@ -130,7 +132,7 @@ const PuzzleSwitch: FC = () => {
         }, 1000)
       }
     }
-  }, [nextLevel, showUp])
+  }, [nextLevel, showUp, levelMode])
 
   useEffect(()=> {
     if(!levelMode){
@@ -138,6 +140,7 @@ const PuzzleSwitch: FC = () => {
       setStart(false)
       setEnd(false)
       setPositionToSwitch({positionTemporaire: null, index: null})
+      setTargetPosition({positionTemporaire: null, index: null})
       dealSetterArray(returnArraySetter(nbPieces, ARRAY_SETTER_9, ARRAY_SETTER_12, ARRAY_SETTER_16), getArrayOfNumbers(nbPieces))
     
       setTimeout(()=> {
@@ -147,7 +150,7 @@ const PuzzleSwitch: FC = () => {
       }, 1000)
       
     }
-  }, [showUp])
+  }, [showUp, levelMode])
 
   useEffect(()=> {
     if(((positionToSwitch.positionTemporaire !== null) && positionToSwitch.index !== null) && ((targetPosition.positionTemporaire !== null) && targetPosition.index !== null)){      
@@ -214,8 +217,7 @@ const PuzzleSwitch: FC = () => {
     setMounted(true)
   }, [])
 
-  const goToNextLevel = (event: any)=> {
-    event.preventDefault()
+  const goToNextLevel = ()=> {
     setLevel(prev=> prev+1)
     setStart(false)
     setNextLevel(false)
@@ -234,10 +236,7 @@ const PuzzleSwitch: FC = () => {
         {
           nextLevel 
           ?
-          <div className={roboto.className + ' next'} onClick={(event)=> goToNextLevel(event)}>
-            Puzzle suivant &rsaquo;&rsaquo;
-          </div>
-        
+          <NextButton goToNextLevel={goToNextLevel} />
           :
           end 
           ?
@@ -276,22 +275,6 @@ const PuzzleSwitchStyle = styled.div`
     height: 240px;
   }
 
-  .next{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 120px;
-    font-size: 50px;
-    color: green;
-    margin-top: 20px;
-    font-weight: bold;
-    border: 3px solid green;
-    width: 400px;
-    background-color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    margin: 20px auto 0;
-  }
 `
 
 export default PuzzleSwitch
