@@ -1,5 +1,4 @@
 import { PositionPiece } from '@/types/positionPiece';
-import { returnFrameSize } from '@/utils/returnFrameSize';
 import Image from 'next/image';
 import React, { Dispatch, FC, SetStateAction, useEffect, useRef } from 'react'
 import styled from 'styled-components'
@@ -20,7 +19,7 @@ const JigsawPuzzleFrame: FC<JigsawPuzzleFrameProps> = ({ nbPieces, image, setFra
   }, [])
 
   return (
-    <JigsawPuzzleFrameStyle style={{width: `${returnFrameSize(nbPieces).width}px`, height: `${returnFrameSize(nbPieces).height}px`}} ref={frameRef}>
+    <JigsawPuzzleFrameStyle ref={frameRef}>
       <Image src={`/images/jigsaw/${image}`} width={500} alt={image} height={500} priority />
     </JigsawPuzzleFrameStyle>
   )
@@ -30,6 +29,8 @@ const JigsawPuzzleFrameStyle = styled.div`
   margin: 15px auto;
   outline: 2px solid black;
   overflow: hidden;
+  width: 500px;
+  height:500px;
 
   img{
     opacity: 0.5;

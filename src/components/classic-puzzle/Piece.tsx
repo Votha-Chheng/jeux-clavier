@@ -86,8 +86,8 @@ const Piece: FC<PieceProps> = ({ image, piece, leftImage, topImage, nbPieces, pi
   }, [showUp, level, resetGame])
 
   useEffect(()=> {
-    setTopPosition(positionPuzzlePieces(nbPieces, piecesZonePosition.topPosition+20, piecesZonePosition.topPosition + 120).topPosition)
-    setLeftPosition(positionPuzzlePieces(nbPieces, piecesZonePosition.leftPosition, piecesZonePosition.leftPosition + 800).leftPosition)
+    setTopPosition(positionPuzzlePieces(piecesZonePosition.topPosition+20, piecesZonePosition.topPosition + 120).topPosition)
+    setLeftPosition(positionPuzzlePieces(piecesZonePosition.leftPosition, piecesZonePosition.leftPosition + 800).leftPosition)
   }, [piecesZoneTopPosition, level, showUp, resetGame])
 
   useEffect(() => {

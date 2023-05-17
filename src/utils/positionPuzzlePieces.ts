@@ -2,7 +2,7 @@ import { PositionPiece } from "@/types/positionPiece";
 import { getRandomNumbers } from "./getRandomNumbers";
 import { JigsawPiece } from "@/types/jigsawPiece";
 
-export const positionPuzzlePieces = (nbPiece: number, min: number, max: number): PositionPiece => {
+export const positionPuzzlePieces = (min: number, max: number): PositionPiece => {
   let leftPosition = getRandomNumbers(min, max);
   let topPosition = getRandomNumbers(min, max);
 
