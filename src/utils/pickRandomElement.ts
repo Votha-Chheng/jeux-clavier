@@ -1,5 +1,5 @@
-export const pickRandomElement = (arrayLetter: string[]): string=> {
-  let selectedItem: string = ""
+export const pickRandomElement = (arrayLetter: string[]|number[]): string|number=> {
+  let selectedItem: string|number = ""
 
   const randomNumber: number = Math.floor(Math.random()*arrayLetter.length)
 

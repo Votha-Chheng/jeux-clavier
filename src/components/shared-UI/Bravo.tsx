@@ -2,20 +2,20 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 
 interface BravoProps{
+  message?: string;
   marginTop?: string;
-  fontSize?: string
+  fontSize?: string;
 }
 
-const Bravo: FC<BravoProps> = ({marginTop = "75px", fontSize =" 250px"}) => {
+const Bravo: FC<BravoProps> = ({message="Bravo", marginTop = "75px", fontSize ="150px"}) => {
   return (
-    <H1 style={{marginTop}}>
-      Bravo
+    <H1 style={{marginTop, fontSize}}>
+      {message}
     </H1>
   )
 }
 
 const H1 = styled.h1`
-  font-size: 150px;
   text-align: center;
   margin-top: 75px;
   color: green;

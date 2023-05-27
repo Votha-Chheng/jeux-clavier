@@ -23,9 +23,9 @@ export default function Home() {
         <HomeScreenContainer>
           <h1 className={poppins.className}>Jeux pour clavier et souris</h1>
           <div className='card-container'>
+            <CardMenuGame title='Nettoyer l&apos;image' link="nettoyage"/>
             <CardMenuGame title='Puzzle switch' link="puzzle-switch"/>
             <CardMenuGame title='Puzzle' link="classic-puzzle"/>
-            {/* <CardMenuGame title='Puzzle' link="jigsaw-puzzle"/> */}
             <CardMenuGame title='Jeu du taquin' link="taquin"/>
             <CardMenuGame title='Range l&apos;alphabet' link="range-alphabet"/>
             <CardMenuGame title='Trouve la lettre' link="trouve-la-lettre"/>
