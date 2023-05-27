@@ -46,13 +46,13 @@ const FindTheLetter: FC = () => {
       displaySuccess(setSuccess, true)
       setTimeout(()=> {
         setLetterInput("")
-        const newArray = removeElementWritten(lettersLeft, letterModel)
+        const newArray: string[] = removeElementWritten(lettersLeft, letterModel)
         if(newArray.length<1){
           setLettersLeft(newArray)
           setEnd(true)
         } else {
           setLettersLeft(newArray)
-          setLetterModel(pickRandomElement(newArray))
+          setLetterModel(pickRandomElement(newArray) as string)
         }
       }, 2000)
 
@@ -66,7 +66,7 @@ const FindTheLetter: FC = () => {
 
   useEffect(()=> {
     setLettersLeft(LETTERS)
-    setLetterModel(pickRandomElement(LETTERS))  
+    setLetterModel(pickRandomElement(LETTERS) as string)  
   }, [])
 
   useEffect(()=> {
@@ -78,7 +78,7 @@ const FindTheLetter: FC = () => {
     setEnd(false)
     setLetterInput("")
     setLettersLeft(LETTERS)
-    setLetterModel(pickRandomElement(LETTERS))  
+    setLetterModel(pickRandomElement(LETTERS) as string)  
   }
 
   if (!mounted) return null

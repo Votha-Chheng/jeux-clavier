@@ -64,8 +64,9 @@ const CleanImage: FC = () => {
       <div className='img-container' style={{width:`${widthDimension*0.9}px`, height:`${heightDimension*0.93}px`, cursor:`${end ? "auto": 'url("/images/clean-cursor.png"), auto'}`}}>
         {/* Loading all images */}
         {
-          getArrayOfNumbers(11).map((number: number)=> (
+          getArrayOfNumbers(11).map((number: number, index)=> (
             <Image 
+              key={index}
               className="piled-images" 
               src={`/images/nettoyage/nettoyage-${number}.jpg`} 
               alt={`image numéro${number}`} 
