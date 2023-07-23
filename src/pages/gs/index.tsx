@@ -12,10 +12,10 @@ import { useKeyUpForLettersOnly } from '../../../hooks/useKeyUpForLettersOnly'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
-import OptionsWriteWords from '@/components/ecris-le-mot/options/OptionsWriteWords'
 import CreateListPanel from '@/components/ecris-le-mot/options/CreateListPanel'
 import { lato } from '@/fonts/lato'
 import { prenomsGS } from '@/datas/ecris-le-mot/prenoms'
+import OptionsEcrisMots from '@/components/ecris-le-mot/options/OptionsEcrisMots'
 
 const EcrisLeMot: FC = () => {
   const [listeMots, setListeMots] = useState<string[]>([])
@@ -148,7 +148,7 @@ const EcrisLeMot: FC = () => {
     <MainStyle>
       <CreateListPanel/>
       <OptionsPanel onClickHandler={removeOptionsPanel}>
-        <OptionsWriteWords />  
+        <OptionsEcrisMots listeTotale={prenomsGS}/>
       </OptionsPanel>
       {
         listeMots !== undefined && <PrenomsListe fullList={listeMots} listePrenomsEcrits={listeMotsEcrits}/>

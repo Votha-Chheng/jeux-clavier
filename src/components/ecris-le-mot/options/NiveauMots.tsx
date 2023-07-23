@@ -1,18 +1,14 @@
-import React, { FC, MouseEvent, useEffect } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import RadioInput from '../../shared-UI/RadioInput'
-import { Rubik } from 'next/font/google'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { getOptions } from '@/store/slices/ecrisLeMotSlice'
 import { rubik } from '@/fonts/rubik'
 
-interface NiveauMotProps  {
-  disabled: boolean;
-}
-
-const NiveauMots: FC<NiveauMotProps> = ({disabled}) => {
-  const { options } = useSelector((state: RootState)=> state.ecrisLeMot)
-  const { niveauMots, typeMot } = options
+const NiveauMots: FC = () => {
+  const [tempLevel, setTempLevel] = useState<number>(0)
+  const { options, selectedCustomListName } = useSelector((state: RootState)=> state.ecrisLeMot)
+  const { niveauMots, typeMot, customListTrue } = options
 
   const dispatch = useDispatch()
 
@@ -20,7 +16,7 @@ const NiveauMots: FC<NiveauMotProps> = ({disabled}) => {
     if(typeMot === "prénom"){
       dispatch(getOptions({...options, niveauMots: 0}))
     } else {
-      dispatch(getOptions({...options, niveauMots: 1}))
+      tempLevel === 0 ? dispatch(getOptions({...options, niveauMots: 1})) : dispatch(getOptions({...options, niveauMots: tempLevel}))
     }
   
   }, [typeMot])
@@ -28,15 +24,15 @@ const NiveauMots: FC<NiveauMotProps> = ({disabled}) => {
 
   const handleClickForNiveau = (niveau: number)=> {
     dispatch(getOptions({...options, niveauMots: niveau}))
-
+    setTempLevel(niveau)
   }
   return (
-    <fieldset className='options-container' disabled={disabled}>
+    <fieldset className='options-container' disabled={typeMot !== "mot" || customListTrue}>
       <legend className={`${rubik.className} legend`}> &nbsp; Niveau des mots : &nbsp;</legend>
-      <RadioInput isChecked={niveauMots === 1} handleClick={()=>handleClickForNiveau(1)} id="1" value= "1" disabled={disabled} />
-      <RadioInput isChecked={niveauMots === 2} handleClick={()=>handleClickForNiveau(2)} id="2" value="2" disabled={disabled} />    
-      <RadioInput isChecked={niveauMots === 3} handleClick={()=>handleClickForNiveau(3)} id="3" value="3 (contient des é, è)" disabled={disabled} />    
-      <RadioInput isChecked={niveauMots === 4} handleClick={()=>handleClickForNiveau(4)} id="4" value="4 (contient des é, è, ç)" disabled={disabled}  />    
+      <RadioInput isChecked={niveauMots === 1} handleClick={()=>handleClickForNiveau(1)} id="1" value= "1 (mots transparents)" />
+      <RadioInput isChecked={niveauMots === 2} handleClick={()=>handleClickForNiveau(2)} id="2" value="2 (mots non-transparents)"/>    
+      <RadioInput isChecked={niveauMots === 3} handleClick={()=>handleClickForNiveau(3)} id="3" value="3 (contient des é, è)" />    
+      <RadioInput isChecked={niveauMots === 4} handleClick={()=>handleClickForNiveau(4)} id="4" value="4 (contient des é, è, ç)" />    
     </fieldset>
   )
 }

@@ -8,6 +8,7 @@ import { RootState } from '@/store/store';
 import { dealSetterArray } from '@/utils/dealSetterArray';
 import { getArrayOfNumbers } from '@/utils/getArrayOfNumbers';
 import { shuffleArrayPiece } from '@/utils/shuffleArrayPiece';
+import { returnNewOrder, shuffleTaquin } from '@/utils/shuffleTaquin';
 import Image from 'next/image';
 import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
@@ -27,6 +28,7 @@ const Taquin: FC = () => {
   const [positionTemporaireElement6, setPositionTemporaireElement6] = useState<number>(0)
   const [positionTemporaireElement7, setPositionTemporaireElement7] = useState<number>(0)
   const [positionTemporaireElement8, setPositionTemporaireElement8] = useState<number>(0)
+  const [dealAtStart, setDealAtStart] = useState<number[]>([0, 1, 2, 3, 4, 5, 6, 7, 8])
 
   const { showUp } = useSelector((state: RootState)=> state.optionsPanel)
 
@@ -63,27 +65,34 @@ const Taquin: FC = () => {
     dealSetterArray(ARRAY_SETTER, getArrayOfNumbers(9))
 
     setTimeout(()=> {
-      const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(9))
-      dealSetterArray(ARRAY_SETTER, arrayShuffled)
-      setStart(true)
+      dealSetterArray(ARRAY_SETTER, dealAtStart)
     }, 2000)
   }
+
+  useEffect(()=> {
+    const newShuffle = returnNewOrder(dealAtStart, 6)
+    setDealAtStart(newShuffle)
+  }, [])
+
+  console.log(dealAtStart)
 
   useEffect(() => {
     setEnd(false)
     setStart(false)
     dealSetterArray(ARRAY_SETTER, getArrayOfNumbers(9))
-
-    setTimeout(()=> {
-      const arrayShuffled: number[] = shuffleArrayPiece(getArrayOfNumbers(9))
-      dealSetterArray(ARRAY_SETTER, arrayShuffled)
-      setStart(true)
-    }, 2000)
     
     //La position temporaitre de l'élément 6 indique la position de la case vide
 
-  }, [])
+    setTimeout(()=> {
+  
+      dealSetterArray(ARRAY_SETTER, dealAtStart)
+  
+      //setStart(true)
+    }, 2000)
 
+  }, [dealAtStart])
+
+  
   if (!mounted) return null
 
   return (

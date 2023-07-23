@@ -1,5 +1,4 @@
 import { RootState } from '@/store/store'
-import { Rubik } from 'next/font/google'
 import React, { FC } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import RadioInput from '../../shared-UI/RadioInput'

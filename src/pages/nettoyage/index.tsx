@@ -39,7 +39,6 @@ const CleanImage: FC = () => {
     } else {
       setImagesLeft(newList)
     }
-    
 
   }, [selectedImage])
 

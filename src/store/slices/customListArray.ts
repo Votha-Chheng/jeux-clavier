@@ -2,53 +2,41 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { ListeMotCustom } from "./ecrisLeMotSlice";
 
 export interface CustomListArray {
-  customPrenomsListArray : ListeMotCustom[]|undefined;
-  customMotsListArray : ListeMotCustom[]|undefined;
+  customListArray : ListeMotCustom[];
 }
 
 const initialState : CustomListArray = {
-  customPrenomsListArray : [],
-  customMotsListArray : []
+  customListArray : []
 }
 
 export const customListArraySlice = createSlice({
   name: 'customListArray',
   initialState,
   reducers: {
-    addCustomList: (state, action: PayloadAction<{typeMots: "prénom"|"mot", listMotCustom: ListeMotCustom}> ) => {
-      if(action.payload.typeMots === "prénom"){
-        if(state.customPrenomsListArray !== undefined){
-          state.customPrenomsListArray.push(action.payload.listMotCustom)
-        } else {
-          state.customPrenomsListArray = [action.payload.listMotCustom]
-        }
+    addCustomList: (state, action: PayloadAction<ListeMotCustom> ) => {
+      if(state.customListArray === undefined ){
+        state.customListArray = [action.payload]
       } else {
-        if(state.customMotsListArray !== undefined){
-          state.customMotsListArray.push(action.payload.listMotCustom)
-        } else {
-          state.customMotsListArray = [action.payload.listMotCustom]
-        }
+        state.customListArray.push(action.payload)
       }
+      
     },
-    deleteCustomPrenomList: (state, action: PayloadAction<ListeMotCustom[]>)=> {
-      state.customPrenomsListArray = action.payload
-    
+    deleteCustomList: (state, action: PayloadAction<string>)=> {
+      const newList = state.customListArray.filter((listeMotsCustom: ListeMotCustom)=> listeMotsCustom.nom !== action.payload)
+      state.customListArray = newList
     },
-    deleteCustomMotsList: (state, action: PayloadAction<ListeMotCustom[]>)=> {
-      state.customMotsListArray = action.payload
-    },
-    modifyCustomListMots: (state, action: PayloadAction<{customListArray: ListeMotCustom[]|undefined, typeMot: "prénom"|"mot"}>)=> {
-      if(action.payload.typeMot === "prénom"){
-        state.customPrenomsListArray = action.payload.customListArray
-      } else {
-        state.customMotsListArray = action.payload.customListArray
-        
+    modifyCustomList: (state, action: PayloadAction<{customListToModify: ListeMotCustom, newList: ListeMotCustom}>)=> {
+      const temp = state.customListArray.find((liste: ListeMotCustom)=> liste.id === action.payload.customListToModify.id)
+
+      if(temp !== undefined){
+        const index = state.customListArray.indexOf(temp)
+        state.customListArray[index] = action.payload.newList
       }
     }
   }
 })
 
 // Action creators are generated for each case reducer function
-export const { addCustomList, deleteCustomPrenomList, deleteCustomMotsList, modifyCustomListMots } = customListArraySlice.actions
+export const { addCustomList, deleteCustomList, modifyCustomList } = customListArraySlice.actions
 
 export default customListArraySlice.reducer

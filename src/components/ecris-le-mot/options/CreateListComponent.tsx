@@ -1,6 +1,5 @@
 import { ListeMotCustom, getCreateList } from '@/store/slices/ecrisLeMotSlice'
 import { RootState } from '@/store/store'
-import { Rubik } from 'next/font/google'
 import Image from 'next/image'
 import React, { Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -13,37 +12,36 @@ interface CreateListComponentProps {
   handleWordValidation: Function;
   motInput: string; 
   listeMots: string[];
+  setMotInput: Dispatch<SetStateAction<string>>;
   setListeMots: Dispatch<SetStateAction<string[]>>;
   wordExists: boolean;
   handleChangeWordInput: Function;
   handleDeleteWordFromListe: Function;
+  nomListeExiste: boolean;
+  setNomListeExiste: Dispatch<SetStateAction<boolean>>;
 }
 
-const CreateListComponent: FC<CreateListComponentProps> = ({handleWordValidation, motInput, listeMots, setListeMots, wordExists, handleChangeWordInput, handleDeleteWordFromListe}) => {
+const CreateListComponent: FC<CreateListComponentProps> = ({handleWordValidation, motInput, setMotInput, listeMots, setListeMots, wordExists, handleChangeWordInput, handleDeleteWordFromListe, nomListeExiste, setNomListeExiste}) => {
   const [nomListe, setNomListe] = useState<string>("")
-  const [nomListeExists, setNomListeExists] = useState<boolean>(false)
 
-  const { customPrenomsListArray, customMotsListArray } = useSelector((state: RootState)=> state.customListArray) 
-  const { options } = useSelector((state: RootState)=> state.ecrisLeMot) 
+  const { customListArray } = useSelector((state: RootState)=> state.customListArray) 
+  const { options, selectedCustomListName } = useSelector((state: RootState)=> state.ecrisLeMot) 
   const { typeMot } = options
 
   const dispatch = useDispatch()
   
 
-  const checkIfNomListeExists = (inputName: string, customListArray: ListeMotCustom[]|undefined): void=> {
+  const checkIfWordExists = (inputName: string, list: string[]): boolean=> {
     let tempExists: string|undefined
 
-    tempExists = customListArray?.find((listeMots: ListeMotCustom)=> listeMots.nom === inputName)?.nom ?? undefined
+    tempExists = list.find((mot: string)=> mot === inputName)
 
-    if(tempExists === undefined){
-      setNomListeExists(false)
-    } else {
-      setNomListeExists(true)
-    }
+    return tempExists === undefined ? false : true
+    
   }
 
   const validateCreationCustomList = (): void=> {
-    if(nomListeExists){
+    if(nomListeExiste){
       alert(`Une liste personnalisée porte déja le nom de ${nomListe}. Veuillez changer de nom.`)
       return
     }
@@ -57,36 +55,34 @@ const CreateListComponent: FC<CreateListComponentProps> = ({handleWordValidation
       listeMot: listeMots,
       id: Date.now().toString()
     }
-    const payload = {typeMots: typeMot, listMotCustom: newCustomList}
-    dispatch(addCustomList(payload))
-    dispatch(getCreateList(false))
-    setListeMots([])
-    setNomListe("")
+
+    dispatch(addCustomList(newCustomList))
+    goBack()
   }
 
   const goBack = (): void => {
     dispatch(getCreateList(false))
     setListeMots([])
     setNomListe("")
+    setMotInput("")
   }
 
   const handleChangeInputNomListe = (event: FormEvent<HTMLInputElement>)=> {
     setNomListe(event.currentTarget.value)
-
-    if(typeMot === "prénom"){
-      checkIfNomListeExists(event.currentTarget.value, customPrenomsListArray)
-    } else {
-      checkIfNomListeExists(event.currentTarget.value, customMotsListArray)
+    if(customListArray.length>0){
+      const listOfNameList = customListArray.map((liste: ListeMotCustom)=> liste.nom)
+      const exist =  checkIfWordExists(event.currentTarget.value, listOfNameList)
+      setNomListeExiste(exist)
     }
   }  
 
   return (
     <CustomListStyle className={rubik.className}  style={{transform: `translateY(0)`}}>
-      <h2>Créer une liste de {typeMot}s personnalisée</h2>
+      <h2>Créer une liste de mots personnalisée</h2>
       <h3>Nom de la liste :</h3> 
       
       <input 
-        className={`${nomListeExists ? "nom-existe": ""}`}
+        className={`${nomListeExiste ? "nom-existe": ""}`}
         value={nomListe} 
         onChange={(event: FormEvent<HTMLInputElement>)=> handleChangeInputNomListe(event)}
         placeholder='Entrez votre mot'
@@ -97,7 +93,7 @@ const CreateListComponent: FC<CreateListComponentProps> = ({handleWordValidation
           <figcaption>
             Entrer un mot sans majuscule. <br/>
           </figcaption>
-          <input  className={`${wordExists ? "word-exists": ""}`} value={motInput} onChange={(event: FormEvent<HTMLInputElement>)=> handleChangeWordInput(event) } placeholder='Entrez votre mot'/>
+          <input className={`${wordExists ? "word-exists": ""}`} value={motInput} onChange={(event: FormEvent<HTMLInputElement>)=> handleChangeWordInput(event) } placeholder='Entrez votre mot'/>
           <div>
             <button onClick={()=> handleWordValidation(motInput, listeMots)}>Valider {typeMot}</button>
           </div>
@@ -117,7 +113,7 @@ const CreateListComponent: FC<CreateListComponentProps> = ({handleWordValidation
         Total de mot : {listeMots.length}
       </div>
       <div className='back'>
-        <Image onClick={()=> validateCreationCustomList()} src='/images/arrow-down.svg' alt="Retour aux préférences" width={50} height={50} />
+        <Image onClick={()=> validateCreationCustomList()} src='/images/save.svg' alt="Retour aux préférences" width={50} height={50} />
         <Image onClick={()=> goBack()} src='/images/cancel.svg' alt="Annuler" width={45} height={45} />
       </div>
     </CustomListStyle>
@@ -155,7 +151,7 @@ const CustomListStyle = styled.section`
     outline: 1px solid black;
     color: black;
 
-    &.nom-existe &.word-exists{
+    &.nom-existe, &.word-exists{
       outline: 3px solid red;
       color: red;
     }

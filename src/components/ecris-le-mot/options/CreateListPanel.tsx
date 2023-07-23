@@ -1,6 +1,6 @@
 import React, { FC, FormEvent, SetStateAction, useEffect, useState } from 'react'
 import styled from 'styled-components'
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { RootState } from '@/store/store';
 import CreateListComponent from './CreateListComponent';
 import CustomListModify from './CustomListModify';
@@ -10,6 +10,7 @@ const CreateListPanel: FC = () => {
   const [listeMots, setListeMots] = useState<string[]>([])
   const [motInput, setMotInput] = useState<string>("")
   const [wordExists, setWordExists] = useState<boolean>(false)
+  const [nomListeExiste, setNomListeExiste] = useState<boolean>(false)
   const { createList, modifyList } = useSelector((state: RootState)=> state.ecrisLeMot)
 
   const keyUp = useKeyUp()
@@ -22,10 +23,10 @@ const CreateListPanel: FC = () => {
 
   const handleChangeWordInput = (event: FormEvent<HTMLInputElement>)=> {
     const mot = event.currentTarget.value
+    setMotInput(mot.trim())
     const result = listeMots?.find((word: string) => word.trim() === mot ) ?? undefined
     if(!result) {
       setWordExists(false)
-      setMotInput(mot.trim())
     } else {
       setWordExists(true)
     }
@@ -60,11 +61,14 @@ const CreateListPanel: FC = () => {
         <CreateListComponent 
           handleWordValidation={handleWordValidation} 
           motInput={motInput} 
+          setMotInput={setMotInput}
           listeMots={listeMots} 
           setListeMots={setListeMots} 
           wordExists={wordExists} 
           handleChangeWordInput={handleChangeWordInput}
           handleDeleteWordFromListe={handleDeleteWordFromListe}
+          nomListeExiste={nomListeExiste}
+          setNomListeExiste={setNomListeExiste}
         />
       }
       {

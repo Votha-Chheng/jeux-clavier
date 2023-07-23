@@ -1,13 +1,12 @@
 import { RootState } from '@/store/store'
-import { Rubik } from 'next/font/google'
-import React, { ChangeEvent, Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react'
+import React, { Dispatch, FC, FormEvent, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
 import Image from 'next/image'
 import { ListeMotCustom, getModifyList } from '@/store/slices/ecrisLeMotSlice'
 import TagWord from './TagWord'
-import { modifyCustomListMots } from '@/store/slices/customListArray'
 import { rubik } from '@/fonts/rubik'
+import { modifyCustomList } from '@/store/slices/customListArray'
 
 interface CustomListModifyProps {
   handleWordValidation: Function;
@@ -24,13 +23,12 @@ const CustomListModify: FC<CustomListModifyProps> = ({ handleWordValidation, mot
 
   const { options, selectedCustomListName } = useSelector((state: RootState)=> state.ecrisLeMot) 
   const { typeMot } = options
-  const { customPrenomsListArray, customMotsListArray } = useSelector((state: RootState)=> state.customListArray)
+  const { customListArray } = useSelector((state: RootState)=> state.customListArray)
 
   const dispatch = useDispatch()
 
-  const returnListeMot = (nomListe: string, typeMot: "prénom"|"mot"): string[]|undefined=> {
-    const temp = typeMot === "prénom" ? customPrenomsListArray : customMotsListArray
-    const selectedList: string[] = temp?.find((liste: ListeMotCustom)=> liste.nom === nomListe)?.listeMot ?? []
+  const returnListeMot = (nomListe: string): string[]|undefined=> {
+    const selectedList: string[] = customListArray?.find((liste: ListeMotCustom)=> liste.nom === nomListe)?.listeMot ?? []
     return selectedList
   }
 
@@ -40,7 +38,7 @@ const CustomListModify: FC<CustomListModifyProps> = ({ handleWordValidation, mot
 
   useEffect(()=> {
     if((nomListe !== "") || (nomListe !== undefined)){
-      const temp = returnListeMot(nomListe, typeMot)
+      const temp = returnListeMot(nomListe)
       setListeMots(temp ?? [])
     }
 
@@ -63,15 +61,17 @@ const CustomListModify: FC<CustomListModifyProps> = ({ handleWordValidation, mot
     
   } 
   
-  const replaceList = (customListArray: ListeMotCustom[]|undefined): void=> {
+  const replaceList = (): void=> {
     if(listeMots === undefined || listeMots.length<1){
       alert("Vous ne pouvez pas laisser une liste de mots vide !")
       return
     }
 
     if(nomListe !== ""){
-      const listArray = getNewCustomListArray(customListArray)
-      dispatch(modifyCustomListMots({customListArray: listArray , typeMot}))
+      const liste: ListeMotCustom[] = customListArray?.filter((listCustom: ListeMotCustom)=> listCustom.nom === nomListe) ?? []
+      const newList: ListeMotCustom = {...liste[0], listeMot : listeMots}
+      const payload = { customListToModify: liste[0], newList}
+      dispatch(modifyCustomList(payload))
       dispatch(getModifyList(false))
     }
   }
@@ -84,16 +84,12 @@ const CustomListModify: FC<CustomListModifyProps> = ({ handleWordValidation, mot
 
   return (
     <ModifyListStyle className={rubik.className}>
-      <h2>Modifier une liste de {typeMot}s personnalisée existante</h2>
-      <h3>Choisir une liste à modifier :</h3>
-
+      <h2>Modifier la liste de mots : <span className='name-list'>{selectedCustomListName}</span></h2>
       {
         nomListe !== "" && listeMots.length>0 
         ?
         <div className='modification-container'>
-          <h4>
-            <span style={{fontWeight:"normal"}}>Nom de la liste :</span> <span style={{textDecoration:"underline"}}>{nomListe}  </span>
-          </h4>
+          <span style={{fontWeight:"normal"}}>Nom de la liste :</span> <span style={{textDecoration:"underline"}}>{nomListe}</span>
           <figcaption>
             Entrez un mot sans majuscule. <br/>
           </figcaption>
@@ -113,7 +109,7 @@ const CustomListModify: FC<CustomListModifyProps> = ({ handleWordValidation, mot
         <h3>Vous n&apos;avez séléctionné aucune liste.</h3>
       }
       <div className='back'>
-        <Image onClick={()=> typeMot==="prénom" ? replaceList(customPrenomsListArray) : replaceList(customMotsListArray)} src='/images/arrow-down.svg' alt="Retour aux préférences" width={50} height={50} />
+        <Image onClick={()=>  replaceList() } src='/images/arrow-down.svg' alt="Retour aux préférences" width={50} height={50} />
         <Image onClick={()=>goBack() } src='/images/cancel.svg' alt="Annuler" width={45} height={45} />
       </div>
     </ModifyListStyle>
@@ -139,6 +135,10 @@ const ModifyListStyle = styled.div`
     margin: 20px 0 5px;
     font-weight: bold;
     letter-spacing: 1.2px;
+  }
+  .name-list{
+    font-style: italic;
+    text-decoration:
   }
   .modification-container {
     margin-top: 25px;

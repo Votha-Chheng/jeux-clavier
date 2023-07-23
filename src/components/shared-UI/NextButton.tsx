@@ -4,12 +4,13 @@ import styled from 'styled-components';
 
 interface NextButtonProps {
   goToNextLevel: Function;
+  message?: string;
 }
 
-const NextButton: FC<NextButtonProps> = ({ goToNextLevel }) => {
+const NextButton: FC<NextButtonProps> = ({ goToNextLevel, message = "Puzzle suivant" }) => {
   return (
     <NextButtonStyle className={roboto.className} onClick={()=> goToNextLevel()}>
-      Puzzle suivant &rsaquo;&rsaquo;
+      {message} &rsaquo;&rsaquo;
     </NextButtonStyle>
   )
 }

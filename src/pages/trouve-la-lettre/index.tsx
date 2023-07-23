@@ -28,7 +28,7 @@ const FindTheLetter: FC = () => {
   useEffect(() => { setMounted(true) }, []);  // avoid hydration issues - run on client
   
   const LETTERS = letters
-  const { typeLettre } = useSelector((state: RootState)=> state.trouveLaLettre)
+  const { typeLettre, ordreAlphabetique } = useSelector((state: RootState)=> state.trouveLaLettre)
   const { showUp } = useSelector((state: RootState)=> state.optionsPanel)
   const letterPressed =  useKeyUpForLettersOnly()
   const dispatch = useDispatch()
@@ -52,7 +52,7 @@ const FindTheLetter: FC = () => {
           setEnd(true)
         } else {
           setLettersLeft(newArray)
-          setLetterModel(pickRandomElement(newArray) as string)
+          setLetterModel(ordreAlphabetique ? newArray[0] : pickRandomElement(newArray) as string)
         }
       }, 2000)
 
@@ -66,8 +66,8 @@ const FindTheLetter: FC = () => {
 
   useEffect(()=> {
     setLettersLeft(LETTERS)
-    setLetterModel(pickRandomElement(LETTERS) as string)  
-  }, [])
+    setLetterModel(ordreAlphabetique ? LETTERS[0] : pickRandomElement(LETTERS) as string)  
+  }, [showUp])
 
   useEffect(()=> {
     success === undefined && handlePressedLetter(letterInput)
@@ -78,7 +78,7 @@ const FindTheLetter: FC = () => {
     setEnd(false)
     setLetterInput("")
     setLettersLeft(LETTERS)
-    setLetterModel(pickRandomElement(LETTERS) as string)  
+    setLetterModel(ordreAlphabetique ? LETTERS[0] : pickRandomElement(LETTERS) as string)  
   }
 
   if (!mounted) return null

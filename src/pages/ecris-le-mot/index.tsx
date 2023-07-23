@@ -12,12 +12,15 @@ import { useKeyUpForLettersOnly } from '../../../hooks/useKeyUpForLettersOnly'
 import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
-import { getSelectedList } from '@/store/slices/ecrisLeMotSlice'
-import OptionsWriteWords from '@/components/ecris-le-mot/options/OptionsWriteWords'
+import { ListeMotCustom, getSelectedList, resetOptions } from '@/store/slices/ecrisLeMotSlice'
 import CreateListPanel from '@/components/ecris-le-mot/options/CreateListPanel'
 import { lato } from '@/fonts/lato'
+import OptionsEcrisMots from '@/components/ecris-le-mot/options/OptionsEcrisMots'
+import { prenoms } from '@/datas/ecris-le-mot/prenoms'
+import { arrayMots } from '@/datas/ecris-le-mot/mots'
 
 const EcrisLeMot: FC = () => {
+  const [listeTotale, setListeTotale] = useState<string[]>([])
   const [listeMots, setListeMots] = useState<string[]>([])
   const [listeMotsEcrits, setListeMotsEcrits] = useState<string[]>([])
   const [listeMotsRestants, setListeMotsRestants] = useState<string[]>([])
@@ -33,17 +36,44 @@ const EcrisLeMot: FC = () => {
 
   const letterPressed =  useKeyUpForLettersOnly()
   const { showUp } = useSelector((state: RootState)=> state.optionsPanel)
-  const { customMotsListArray, customPrenomsListArray } = useSelector((state: RootState)=> state.customListArray)
+  const { customListArray} = useSelector((state: RootState)=> state.customListArray)
   const { options, selectedList, selectedCustomListName } = useSelector((state: RootState)=> state.ecrisLeMot)
   const { lengthOptions, typeMot,  uppercase, customListTrue, niveauMots } = options
 
+  console.log(customListArray)
+
   const dispatch = useDispatch()
-  
+
   useEffect(()=> {
-    const array = (typeMot === "prénom") ? customPrenomsListArray : customMotsListArray
-    dispatch(getSelectedList({listeMotCustom: array, customListTrue}))      
-    
-  }, [customListTrue, typeMot, selectedCustomListName, customMotsListArray, customPrenomsListArray, niveauMots])
+    return ()=> {
+      dispatch(resetOptions())
+    }
+  }, [dispatch])
+
+  useEffect(()=> {
+    typeMot === "prénom" ? setListeTotale(prenoms)  : setListeTotale(arrayMots[niveauMots-1])
+
+    if(customListTrue) {
+      const temp: ListeMotCustom[]|undefined = customListArray?.filter((listeMotCustom: ListeMotCustom)=> listeMotCustom.nom === selectedCustomListName)
+
+      if(temp !== undefined && temp.length>0){
+        setListeTotale([...temp[0].listeMot])
+      } else {
+        typeMot === "prénom" ? setListeTotale(prenoms)  : setListeTotale(arrayMots[niveauMots-1])
+      }  
+    }
+
+    dispatch(getSelectedList(listeTotale))
+
+  }, [typeMot, customListTrue, niveauMots, selectedCustomListName])
+
+  useEffect(()=>{
+    const liste = pickAListOfElements(listeTotale, lengthOptions)
+    setListeMots(liste)
+    setListeMotsRestants(liste)
+    setLettersLeft([])
+
+  }, [options, selectedList, showUp])
 
   useEffect(()=> {
     if(listeMotsRestants.length>0 && listeMotsRestants !== undefined){
@@ -55,15 +85,6 @@ const EcrisLeMot: FC = () => {
     }
     
   }, [listeMotsRestants])
-
-  useEffect(()=>{
-    const liste = pickAListOfElements(selectedList, lengthOptions)
-    setListeMots(liste)
-    setListeMotsRestants(liste)
-    setLettersLeft([])
-
-  }, [selectedList, lengthOptions, niveauMots])
-
 
   useEffect(()=> {
     if(success !== undefined){
@@ -129,7 +150,7 @@ const EcrisLeMot: FC = () => {
   const resetGame = (): void=> {
     setEnd(false)
     dispatch(setShowUp(false))
-    const liste = pickAListOfElements(selectedList, lengthOptions)
+    const liste = pickAListOfElements(listeTotale, lengthOptions)
     setListeMotsEcrits([])
     setListeMots(liste)
     setListeMotsRestants(liste)
@@ -155,7 +176,7 @@ const EcrisLeMot: FC = () => {
     <MainStyle>
       <CreateListPanel/>
       <OptionsPanel onClickHandler={removeOptionsPanel}>
-        <OptionsWriteWords />  
+        <OptionsEcrisMots listeTotale={listeTotale}/>
       </OptionsPanel>
       {
         listeMots !== undefined && <PrenomsListe fullList={listeMots} listePrenomsEcrits={listeMotsEcrits}/>
@@ -180,6 +201,7 @@ const EcrisLeMot: FC = () => {
 }
 
 export default EcrisLeMot
+
 
 const MainStyle = styled.main`
   padding: 0;
