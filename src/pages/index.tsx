@@ -5,6 +5,7 @@ import { lato } from '@/fonts/lato';
 import { poppins } from '@/fonts/poppins';
 import { rubik } from '@/fonts/rubik';
 import Head from 'next/head'
+import Link from 'next/link';
 import React, { FC, useEffect, useState } from 'react'
 import styled from 'styled-components'
 
@@ -42,6 +43,11 @@ export default function Home() {
             <CardMenuGame title='Trouve la lettre' link="trouve-la-lettre"/>
             <CardMenuGame title='	&Eacute;cris des mots' link="ecris-le-mot"/>
           </div>
+          <div className='contact'>
+            <Link href="/faire-un-don" className={rubik.className} >
+              Faire un don & contact
+            </Link>
+          </div>
         </HomeScreenContainer>
       </GameContainerLayout>
     </>
@@ -55,7 +61,7 @@ const HomeScreenContainer = styled.main`
 
   h1 {
     text-align: center;
-    margin : 20px auto;
+    margin : 10px auto 20px;
     font-weight: bold;
   }
 
@@ -68,6 +74,17 @@ const HomeScreenContainer = styled.main`
     font-size: 25px;
     text-align: left;
     margin-top: 50px;
+  }
+
+  .contact{
+    margin: 40px auto 0;
+    padding: 7.5px;
+    border: 2px solid #53599a;
+    border-radius: 10px;
+    background-color: white;
+    text-align: center;
+    color: #53599a;
+    font-weight: bold;
   }
 
 `

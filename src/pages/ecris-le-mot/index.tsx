@@ -162,7 +162,7 @@ const EcrisLeMot: FC = () => {
   }
 
   const removeOptionsPanel = ()=> {
-    if((showUp && selectedList.length<1) || (customListTrue && selectedCustomListName === "")){
+    if((showUp && listeTotale.length<1) || (customListTrue && selectedCustomListName === "")){
       alert("Vous n'avez pas sélectionné de liste !")
       return
     } else {
