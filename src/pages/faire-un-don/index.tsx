@@ -48,14 +48,14 @@ const FaireUnDon: FC = () => {
       <BackToMenu/>
       <h2 className={roboto.className}>Pourquoi ce site ?</h2>
       <p className={poppins.className}>
-        Mon prénom est Votha, et je travaille depuis maintenant plus de 5 ans en tant qu'intervenant informatique auprès de classes en maternelle et en primaire, et j'ai pu constater l'importance grandissante de la place d l'importance de la place de l'apprentissage et surtout de la prise en main des outils de l'informatique et plus spécifiquement la souris et le clavier. Les activités du site sont conçus sans aucune forme de challenge ou de compétition, et ne servent qu'à l'entraînement. Suivant de futures besoins que j'aurais constaté (ou que vous pouvez me faire parvenir via le formulaire de contact), les activités évolueront ou d'autres seront ajoutées.
+        Mon prénom est Votha, et je travaille depuis maintenant plus de 5 ans en tant qu`&apos;intervenant informatique auprès de classes en maternelle et en primaire, et j`&apos;ai pu constater l`&apos;importance grandissante de la place d l`&apos;importance de la place de l`&apos;apprentissage et surtout de la prise en main des outils de l`&apos;informatique et plus spécifiquement la souris et le clavier. Les activités du site sont conçus sans aucune forme de challenge ou de compétition, et ne servent qu`&apos;à l`&apos;entraînement. Suivant de futures besoins que j`&apos;aurais constaté (ou que vous pouvez me faire parvenir via le formulaire de contact), les activités évolueront ou d`&apos;autres seront ajoutées.
       </p>
       <p className={poppins.className + " last"}>
         Ayant travaillé dans une école avec une connexion internet, disons-le, tout bonnement horrible, le poids du site extrêment léger permet un chargement rapide, même en cas de débit très lent.
       </p>
       <h2 className={roboto.className}>Faire un don</h2>
       <p className={poppins.className}>
-        Parce que je crée et code ce site de A à Z uniquement sur mon temps libre, n'hésitez pas à m'aider à continuer pour le maintien du site. Et puis, je ne vais pas vous le cacher, des petits dons de 2€ ou plus, ça fait toujours plaisir ! ;-D
+        Parce que je crée et code ce site de A à Z uniquement sur mon temps libre, n`&apos;hésitez pas à m`&apos;aider à continuer pour le maintien du site. Et puis, je ne vais pas vous le cacher, des petits dons de 2€ ou plus, ça fait toujours plaisir ! ;-D
       </p>
 
       <div className='donate-btn'>
@@ -84,7 +84,7 @@ const FaireUnDon: FC = () => {
         :
         <section className='formulaire'>
           {
-            emailError && <div className={lato.className} style={{color:"red", textAlign:"center", margin:"10px"}}> "Une erreur est survenue, le message n'a divas pu être envoyé..."</div>
+            emailError && <div className={lato.className} style={{color:"red", textAlign:"center", margin:"10px"}}> Une erreur est survenue, le message n&apos;a pas pu être envoyé...</div>
           }
           {
             !emailSent     
