@@ -47,6 +47,7 @@ const FaireUnDon: FC = () => {
     <ContactPageContainer>
       <BackToMenu/>
       <h2 className={roboto.className}>Pourquoi ce site ?</h2>
+      <Image className='portrait' style={{borderRadius:"50%"}} src="/images/portrait.jpg" alt="Portrait de Votha Chheng" width={125} height={125}/>
       <p className={poppins.className}>
         Mon prénom est Votha, et je travaille depuis maintenant plus de 5 ans en tant qu`&apos;intervenant informatique auprès de classes en maternelle et en primaire, et j`&apos;ai pu constater l`&apos;importance grandissante de la place d l`&apos;importance de la place de l`&apos;apprentissage et surtout de la prise en main des outils de l`&apos;informatique et plus spécifiquement la souris et le clavier. Les activités du site sont conçus sans aucune forme de challenge ou de compétition, et ne servent qu`&apos;à l`&apos;entraînement. Suivant de futures besoins que j`&apos;aurais constaté (ou que vous pouvez me faire parvenir via le formulaire de contact), les activités évolueront ou d`&apos;autres seront ajoutées.
       </p>
@@ -156,6 +157,12 @@ const ContactPageContainer = styled.main`
   }
   .submit-btn {
     padding: 5px;
+  }
+
+  .portrait{
+    border: 1px solid white;
+    float: right;
+    margin: 15px 0 0 50px;
   }
 `
 
