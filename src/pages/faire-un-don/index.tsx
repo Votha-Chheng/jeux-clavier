@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, SyntheticEvent, useEffect, useRef, useState } from 'react'
+import React, { ChangeEvent, FC, SyntheticEvent, useRef, useState } from 'react'
 import { poppins } from '@/fonts/poppins'
 import { roboto } from '@/fonts/roboto'
 import Link from 'next/link'
