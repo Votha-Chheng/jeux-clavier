@@ -1,7 +1,5 @@
 import CardMenuGame from '@/components/home/CardMenuGame'
 import GameContainerLayout from '@/components/layouts/GameContainerLayout';
-import { josefinSans } from '@/fonts/josefinSans';
-import { lato } from '@/fonts/lato';
 import { poppins } from '@/fonts/poppins';
 import { rubik } from '@/fonts/rubik';
 import Head from 'next/head'
@@ -37,11 +35,12 @@ export default function Home() {
             <CardMenuGame title='Puzzle' link="classic-puzzle"/>
             {/* <CardMenuGame title='Jeu du taquin' link="taquin"/> */}
             <CardMenuGame title='Range l&apos;alphabet' link="range-alphabet"/>
+            <CardMenuGame title='Memory' link="memory"/>
           </div>
           <h1 className={`${rubik.className} subtitle`}>Utiliser le clavier</h1>
           <div className='card-container'>
             <CardMenuGame title='Trouve la lettre' link="trouve-la-lettre"/>
-            <CardMenuGame title='	&Eacute;cris des mots' link="ecris-le-mot"/>
+            <CardMenuGame title='&Eacute;cris des mots' link="ecris-le-mot"/>
           </div>
           <div className='contact'>
             <Link href="/faire-un-don" className={rubik.className} >

@@ -11,6 +11,7 @@ import { getArrayOfNumbers } from '@/utils/getArrayOfNumbers'
 import { pickRandomElement } from '@/utils/pickRandomElement'
 import { colorsList } from '@/datas/nettoyage/colorsList'
 import IconsFooter from '@/components/shared-UI/IconsFooter'
+import { blinkAnimation } from '@/styles/globalStyle'
 
 const CleanImage: FC = () => {
   const [imagesLeft, setImagesLeft] = useState<number[]>(getArrayOfNumbers(11))
@@ -34,6 +35,7 @@ const CleanImage: FC = () => {
 
   useEffect(()=> {
     const newList = imagesLeft.filter((number: number)=> number !== selectedImage)
+
     if(newList.length<1){
       setEnd(true)
     } else {
@@ -78,7 +80,7 @@ const CleanImage: FC = () => {
         }
         { 
           success &&
-          <div className={`${success ? "success" : "no-success"}`}>
+          <div className={`${success ? "success-blink" : "no-success"}`}>
             <Bravo marginTop='0'/> 
           </div>
         }
@@ -114,18 +116,7 @@ const CleanImage: FC = () => {
   )
 }
 
-const blinkAnimation = keyframes`
-  0% { opacity: 1 };
-  20% { opacity: 1 };
-  25% { opacity: 0 };
-  30% { opacity: 1 };
-  50% { opacity: 1 };
-  55% { opacity: 0 };
-  60% { opacity: 1 };
-  80% { opacity: 1 };
-  85% { opacity: 0 };
-  90% { opacity: 1 };
-`
+
 
 const CleanImageStyle = styled.main`
   width: 100%;
@@ -137,7 +128,7 @@ const CleanImageStyle = styled.main`
   .no-success {
     display: none;
   }
-  .success {
+  .success-blink {
     padding-top: 25%;
     left: 50%;
     transform: translateX(-50%);

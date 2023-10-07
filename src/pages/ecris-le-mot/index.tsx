@@ -40,8 +40,6 @@ const EcrisLeMot: FC = () => {
   const { options, selectedList, selectedCustomListName } = useSelector((state: RootState)=> state.ecrisLeMot)
   const { lengthOptions, typeMot,  uppercase, customListTrue, niveauMots } = options
 
-  console.log(customListArray)
-
   const dispatch = useDispatch()
 
   useEffect(()=> {

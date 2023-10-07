@@ -91,9 +91,9 @@ const Piece: FC<PieceProps> = ({ image, piece, leftImage, topImage, nbPieces, pi
   }, [piecesZoneTopPosition, level, showUp, resetGame])
 
   useEffect(() => {
-  if(grabbed){
-    moveTag()
-  }
+    if(grabbed){
+      moveTag()
+    }
     
   }, [grabbed, x, y])
 
