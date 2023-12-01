@@ -7,6 +7,7 @@ import OptionsPanel from '@/components/shared-UI/OptionsPanel'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
 import { RootState } from '@/store/store'
 import { blinkAnimation } from '@/styles/globalStyle'
+import Head from 'next/head'
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import styled from 'styled-components'
@@ -32,7 +33,12 @@ const Memory = () => {
 
   const { showUp } = useSelector((state: RootState)=> state.optionsPanel)
 
-  const dispatch = useDispatch()  
+  const dispatch = useDispatch() 
+  
+  //start game
+  const startGame = ()=> {
+
+  }
 
   const reset = ()=> {
     setEnd(null)
@@ -43,10 +49,14 @@ const Memory = () => {
     setCardsWon([])
     setLevel(0)
   }
+  console.log(end)
   
   return (
     <GameContainerLayout>
       <MemoryContainer>
+        <Head>
+          <title>Jeu du memory</title>
+        </Head>
         <OptionsPanel onClickHandler={()=> dispatch(setShowUp(!showUp)) } >
           <OptionsMemory numberOfCards={numberOfCards} setNumberOfCards={setNumberOfCards} progression={progression} setProgression={setProgression} />
         </OptionsPanel>
@@ -57,7 +67,7 @@ const Memory = () => {
             <Bravo marginTop='-75px'/> 
           </div>
           :
-          end === "endGame" || level > 3
+          end === "endGame"
           ?
           <>
             <Bravo/>

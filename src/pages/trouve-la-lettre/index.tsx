@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
 import { roboto } from '@/fonts/roboto'
+import { Head } from 'next/document'
 
 const FindTheLetter: FC = () => {
   const [success, setSuccess] = useState<boolean|undefined>(undefined)
@@ -85,6 +86,9 @@ const FindTheLetter: FC = () => {
 
   return (
     <MainStyle>
+      <Head>
+        <title>Trouve la bonne lettre sur le clavier</title>
+      </Head>
       <OptionsPanel  onClickHandler={()=> dispatch(setShowUp(!showUp))}>
         <Options/>
       </OptionsPanel>

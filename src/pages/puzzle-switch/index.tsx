@@ -12,6 +12,7 @@ import { dealSetterArray } from '@/utils/dealSetterArray'
 import { getArrayOfNumbers } from '@/utils/getArrayOfNumbers'
 import { returnArraySetter, returnArrayStates } from '@/utils/returnArrayStatesSetters'
 import { shuffleArrayPiece } from '@/utils/shuffleArrayPiece'
+import { Head } from 'next/document'
 import Image from 'next/image'
 import React, { FC, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
@@ -229,6 +230,9 @@ const PuzzleSwitch: FC = () => {
   return (
     <GameContainerLayout>
       <PuzzleSwitchStyle>
+        <Head>
+          <title>Puzzle switch</title>
+        </Head>
         <OptionsPanel onClickHandler={()=> dispatch(setShowUp(!showUp))}>
           <OptionsPuzzleSwitch setImage={setImage} image={image} setNbPieces={setNbPieces} nbPieces={nbPieces} levelMode={levelMode} setLevelMode={setLevelMode} />
         </OptionsPanel>

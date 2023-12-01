@@ -72,7 +72,7 @@ const MemoryDisplay: FC<OptionsMemoryProps & Memorydisplay> = ({
 
   useEffect(()=> {
     if(cardsWon.length === numberOfCards/2){
-      progression === "automatic" ? endLevelAndGoNext() : setEnd("endGame")
+      progression === "automatic" && numberOfCards !==0 ? endLevelAndGoNext() : setEnd("endGame")
     }
   }, [cardsWon, numberOfCards, setEnd])
   
@@ -81,10 +81,13 @@ const MemoryDisplay: FC<OptionsMemoryProps & Memorydisplay> = ({
   const endLevelAndGoNext = ()=> {
     setEnd("endLevel")
     setTimeout(()=> {
-      setEnd(null)
-      setLevel(prev => prev + 1)
-      reset()
-      setNumberOfCards(prev => prev === 12 ? 16 : prev === 16 ? 20 : prev === 20 ? 24 : 12)
+      if(numberOfCards !== 0){
+        setEnd(null)
+        setLevel(prev => prev + 1)
+        reset()
+      }
+      //Si le nombre de cartes est égal à 0, le jeu est fini
+      setNumberOfCards(prev => prev === 12 ? 16 : prev === 16 ? 20 : prev === 20 ? 24 : prev=== 24 ? 0:0)
     }, 3000)
   }
 

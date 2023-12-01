@@ -14,6 +14,7 @@ import { RootState } from '@/store/store'
 import OptionsRangeAlphabet from '@/components/range-alphabet/options/OptionsRangeAlphabet'
 import { pickAListOfElements } from '@/utils/pickAListOfElements'
 import Bravo from '@/components/shared-UI/Bravo'
+import { Head } from 'next/document'
 
 const RangeAlphabet: FC = () => {
   const [isGrabbing, setIsGrabbing] = useState<boolean>(false)
@@ -51,6 +52,9 @@ const RangeAlphabet: FC = () => {
   return (
     <GameContainerLayout borderLeft='5px solid black' borderRight='5px solid black'>
       <ContainerDiv>
+        <Head>
+          <title>Range l'alphabet dans l'ordre</title>
+        </Head>
         <OptionsPanel onClickHandler={()=> dispatch(setShowUp(!showUp))}>
           <OptionsRangeAlphabet nbLettresARanger={nbLettresARanger} setNbLettresARanger={setNbLettresARanger}/>
         </OptionsPanel>

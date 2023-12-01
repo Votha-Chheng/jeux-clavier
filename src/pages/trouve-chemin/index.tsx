@@ -4,6 +4,7 @@ import { displayTrueBoolean } from '@/utils/displaySuccess';
 import Bravo from '@/components/shared-UI/Bravo';
 import LevelLayout from '@/components/trouve-chemin/LevelLayout';
 import IconsFooter from '@/components/shared-UI/IconsFooter';
+import Head from 'next/head';
 
 const TrouveChemin: FC = () => {
 
@@ -35,6 +36,9 @@ const TrouveChemin: FC = () => {
 
   return (
     <ContainerStyle>
+      <Head>
+        <title>Trouve ton chemin avec la souris</title>
+      </Head>
       {
         end 
         ?

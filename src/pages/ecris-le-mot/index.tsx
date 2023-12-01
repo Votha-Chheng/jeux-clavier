@@ -18,6 +18,7 @@ import { lato } from '@/fonts/lato'
 import OptionsEcrisMots from '@/components/ecris-le-mot/options/OptionsEcrisMots'
 import { prenoms } from '@/datas/ecris-le-mot/prenoms'
 import { arrayMots } from '@/datas/ecris-le-mot/mots'
+import Head from 'next/head'
 
 const EcrisLeMot: FC = () => {
   const [listeTotale, setListeTotale] = useState<string[]>([])
@@ -172,6 +173,9 @@ const EcrisLeMot: FC = () => {
 
   return (
     <MainStyle>
+      <Head>
+        <title>Trouve ton chemin avec la souris</title>
+      </Head>
       <CreateListPanel/>
       <OptionsPanel onClickHandler={removeOptionsPanel}>
         <OptionsEcrisMots listeTotale={listeTotale}/>

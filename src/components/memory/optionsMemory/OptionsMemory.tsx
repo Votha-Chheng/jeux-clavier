@@ -7,6 +7,10 @@ import styled from 'styled-components'
 
 
 const OptionsMemory : FC<OptionsMemoryProps> = ({ numberOfCards, setNumberOfCards, setProgression, progression }) => {
+  const changeProgression = (type: "manual"|"automatic")=> {
+    setProgression(type)
+    setNumberOfCards(12)
+  }
   return (
     <SectionStyle>
       <h1 className={rubik.className + " titre-options"}>Préférences</h1>
@@ -16,14 +20,14 @@ const OptionsMemory : FC<OptionsMemoryProps> = ({ numberOfCards, setNumberOfCard
           width='75px'
           isChecked={progression === "manual"}
           id="manual"
-          handleClick={()=> setProgression("manual")}
+          handleClick={()=> changeProgression("manual")}
           value="Manuel"
         />
         <RadioInput 
           width='75px'
           isChecked={progression === "automatic"}
           id="automatic"
-          handleClick={()=> setProgression("automatic")}
+          handleClick={()=> changeProgression("automatic")}
           value="Automatique"
         />
       </div>
@@ -35,6 +39,7 @@ const OptionsMemory : FC<OptionsMemoryProps> = ({ numberOfCards, setNumberOfCard
           id="12"
           handleClick={()=> setNumberOfCards(12)}
           value="12"
+          disabled={progression === "automatic"}
         />
         <RadioInput 
           width='75px'
@@ -42,6 +47,7 @@ const OptionsMemory : FC<OptionsMemoryProps> = ({ numberOfCards, setNumberOfCard
           id="16"
           handleClick={()=> setNumberOfCards(16)}
           value="16"
+          disabled={progression === "automatic"}
         />
         <RadioInput 
           width='75px'
@@ -49,6 +55,7 @@ const OptionsMemory : FC<OptionsMemoryProps> = ({ numberOfCards, setNumberOfCard
           id="20"
           handleClick={()=> setNumberOfCards(20)}
           value="20"
+          disabled={progression === "automatic"}
         />
         <RadioInput 
           width='75px'
@@ -56,6 +63,7 @@ const OptionsMemory : FC<OptionsMemoryProps> = ({ numberOfCards, setNumberOfCard
           id="24"
           handleClick={()=> setNumberOfCards(24)}
           value="24"
+          disabled={progression === "automatic"}
         />
       </div>
     </SectionStyle>

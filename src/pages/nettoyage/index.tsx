@@ -12,6 +12,7 @@ import { pickRandomElement } from '@/utils/pickRandomElement'
 import { colorsList } from '@/datas/nettoyage/colorsList'
 import IconsFooter from '@/components/shared-UI/IconsFooter'
 import { blinkAnimation } from '@/styles/globalStyle'
+import { Head } from 'next/document'
 
 const CleanImage: FC = () => {
   const [imagesLeft, setImagesLeft] = useState<number[]>(getArrayOfNumbers(11))
@@ -62,6 +63,9 @@ const CleanImage: FC = () => {
 
   return (
     <CleanImageStyle style={{height:`${heightDimension}px`}}>
+      <Head>
+        <title>Nettoie l'image</title>
+      </Head>
       <div className='img-container' style={{width:`${widthDimension*0.9}px`, height:`${heightDimension*0.93}px`, cursor:`${end ? "auto": 'url("/images/clean-cursor.png"), auto'}`}}>
         {/* Loading all images */}
         {

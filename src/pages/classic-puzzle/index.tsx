@@ -15,6 +15,7 @@ import OptionsJigsawPuzzle from '@/components/jigsaw-puzzle/options/OptionsJigsa
 import { returnArrayPieces } from '@/utils/returnArrayPieces'
 import Piece from '@/components/classic-puzzle/Piece'
 import { pickRandomElement } from '@/utils/pickRandomElement'
+import Head from 'next/head'
 
 const JigsawPuzzle: FC = () => {
   const [level, setLevel] = useState<number>(0)
@@ -80,6 +81,9 @@ const JigsawPuzzle: FC = () => {
   return (
     <GameContainerLayout >
       <ScreenContainer>
+        <Head>
+          <title>Puzzles en ligne</title>
+        </Head>
         <OptionsPanel onClickHandler={()=> dispatch(setShowUp(!showUp)) }>
           <OptionsJigsawPuzzle
             precision={precision}

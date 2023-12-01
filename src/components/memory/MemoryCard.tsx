@@ -74,6 +74,7 @@ const CardContainer = styled.div`
   border: 5px solid white;
   border-radius: 5px;
   margin: 2.5px;
+  user-select: none;
 
   &:hover {
     cursor: pointer;
