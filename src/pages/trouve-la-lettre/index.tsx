@@ -16,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { RootState } from '@/store/store'
 import { setShowUp } from '@/store/slices/optionsPanelSlice'
 import { roboto } from '@/fonts/roboto'
-import { Head } from 'next/document'
+import Head from 'next/head'
 
 const FindTheLetter: FC = () => {
   const [success, setSuccess] = useState<boolean|undefined>(undefined)
